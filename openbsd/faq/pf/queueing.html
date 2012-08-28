@@ -433,52 +433,54 @@ queue <i>name</i> [on <i>interface</i>] bandwidth <i>bw</i> [priority
 </blockquote>
 
 <ul>
-<li><tt><i>name</i></tt> - the name of the queue. This must match the
-name of one of the queues defined in the <tt>altq on</tt> directive's
-<tt><i>queue_list</i></tt>. For <tt>cbq</tt> it can also match the name
-of a queue in a previous <tt>queue</tt> directive's
-<tt><i>queue_list</i></tt>. Queue names must be no longer than 15 characters.
-<li><tt><i>interface</i></tt> - the network interface that the queue is
-valid on. This value is optional, and when not specified, will make
-the queue valid on all interfaces.
-<li><tt><i>bw</i></tt> - the total amount of bandwidth available to the
-queue.
-This may be specified as an absolute value using the suffixes <tt>b</tt>,
-<tt>Kb</tt>, <tt>Mb</tt>, and <tt>Gb</tt> to represent bits, kilobits,
-megabits, and gigabits per second, respectively or as a percentage of the
-parent queue's bandwidth.
-This parameter is only applicable when using the <tt>cbq</tt> scheduler.
-If not specified, the default is 100% of the parent queue's bandwidth.
-<li><tt><i>pri</i></tt> - the priority of the queue. For <tt>cbq</tt> the
-priority range is 0 to 7 and for <tt>priq</tt> the range is 0 to 15.
-Priority 0 is the lowest priority. When not specified, a default of 1 is
-used.
-<li><tt><i>qlim</i></tt> - the maximum number of packets to hold in the queue. 
-When not specified, a default of 50 is used.
-<li><tt><i>scheduler</i></tt> - the scheduler being used, either <tt>cbq</tt>
-or <tt>priq</tt>. Must be the same as the root queue.
-<li><tt><i>sched_options</i></tt> - further options may be passed to the scheduler
-to control its behavior:
+<li><tt><i>name</i></tt> - наименование очереди. Оно должно соответствовать
+названию одной из очередей, определенных в списке <tt><i>queue_list</i></tt>
+директивы <tt>altq on</tt>. Для использования <tt>cbq</tt> это наименование
+также может присутствовать в списке <tt><i>queue_list</i></tt> определенной 
+ранее директивы <tt>queue</tt>. Наименование очереди не должно превышать 15
+символов.
+<li><tt><i>interface</i></tt> - сетевой интерфейс к которому привязана очередь
+Это значение не является обязательным и может быть опущено. В этом случае
+очередь действеует на всех сетевых интерфейсах.
+<li><tt><i>bw</i></tt> - полная ширина канала, доступная очереди.
+Занчение может быть указано как абсолютное значение с использованием суффиксов
+<tt>b</tt>, <tt>Kb</tt>, <tt>Mb</tt>, и <tt>Gb</tt> которые означают бит,
+килобит, мегабит и гигабит в секунду соответственно или как процент от ширины
+родительской очереди. Этот параметр применяется только в случае использования
+планировщика <tt>cbq</tt>. Если значение не определено, то по умолчанию
+используется значение 100% ширины канала родительской очереди.
+<li><tt><i>pri</i></tt> - приоритет очереди. Допустимые значения для
+планировщика <tt>cbq</tt> - 0-7, для <tt>priq</tt> 0-15. Приоритер 0 - имеет
+самый низкий приоритет. Если значение не указано, то по умолчанию используется
+приоритет 1.
+<li><tt><i>qlim</i></tt> - максимальное количество пакетов, которые будет
+содержать очередь. Если значение не указано, то по умолчанию оно берется равным
+50.
+<li><tt><i>scheduler</i></tt> - тип используемого пранировщика <tt>cbq</tt> или
+<tt>priq</tt>. Должен быть таким же как и у родительской очереди.
+<li><tt><i>sched_options</i></tt> - дополнительные параметры планировщика, для
+настройки его поведения:
 	<ul>
-	<li><tt>default</tt> - defines a default queue where all packets not
-	matching any other queue will be queued. Exactly one default queue
-	is required.
-	<li><tt>red</tt> - enables Random Early Detection (RED) on this queue.
-	<li><tt>rio</tt> - enables RED with IN/OUT. In this mode, RED will
-	maintain multiple average queue lengths and multiple threshold
-	values, one for each IP Quality of Service level.
-	<li><tt>ecn</tt> - enables Explicit Congestion Notification (ECN) on
-	this queue. <tt>Ecn</tt> implies <tt>red</tt>.
-	<li><tt>borrow</tt> - the queue can borrow bandwidth from its parent. This can
-	only be specified when using the <tt>cbq</tt> scheduler.
+	<li><tt>default</tt> - очередь назначается очередью по умолчанию, в которую
+	будут попадать пакеты, не попавшие ни в одну другую очередь. Должна быть
+	определена ровно одна очередь по умолчанию.
+	<li><tt>red</tt> - разрешает раннюю случайную диагностику (RED) для очереди.
+	<li><tt>rio</tt> - разрешает RED для IN/OUT направлений. <font color="red"><b>В этом режиме RED
+	будет контролировать множество значений средних размеров очередей и
+	множество пороговых значений по одному для каждого уровня IP Quality of Service.</font color></b>
+	<li><tt>ecn</tt> - разрешает явное уведомление о перегрузке (ECN) для
+	очереди. Указание <tt>Ecn</tt> подразумевает включение <tt>red</tt>.
+	<li><tt>borrow</tt> - очередь может заимствовать канал у родительской
+	очереди. Этот параметр может быть указан только для планировщика
+	<tt>cbq</tt>.
 	</ul>
-<li><tt><i>queue_list</i></tt> - a list of child queues to create under this
-queue. A <tt><i>queue_list</i></tt> may only be defined when using the
-<tt>cbq</tt> scheduler.
+<li><tt><i>queue_list</i></tt> - список дочерних очередей, создаваемых под
+корневой очередью. Список <tt><i>queue_list</i></tt> может быть объявлен
+только при использовании планировщика <tt>cbq</tt>.
 </ul>
 
 <p>
-Continuing with the example above:
+В продолжение вишеизложенного пример:
 <blockquote>
 <tt>
 queue std bandwidth 50% cbq(default)<br>
@@ -490,39 +492,38 @@ queue ftp bandwidth 500Kb priority 3 cbq(borrow red)<br>
 </blockquote>
 
 <p>
-Here the parameters of the previously defined child queues are set. The
-<tt>std</tt> queue is assigned a bandwidth of 50% of the root queue's
-bandwidth (or 1Mbps) and is set as the default queue. The <tt>ssh</tt>
-queue is assigned 25% of the root queue's bandwidth (500kb) and also
-contains two child queues, <tt>ssh_login</tt> and
-<tt>ssh_bulk</tt>. The <tt>ssh_login</tt> queue is given a higher
-priority than <tt>ssh_bulk</tt> and both have ECN enabled.  The
-<tt>ftp</tt> queue is assigned a bandwidth of 500Kbps and given a
-priority of 3. It can also borrow bandwidth when extra is available and
-has RED enabled. 
+Здесь определяются параметры для объявленных ранее дочерних очередей
+Очереди <tt>std</tt> присваивается ширина канала равная 50% ширины канала
+корневой очереди и она назначается очередью по умолчанию. Очереди <tt>ssh</tt>
+присваивается ширина канала равная 25% ширины канала корневой очереди (500kb)
+и в ней объявляются две дочерние очереди <tt>ssh_login</tt> и <tt>ssh_bulk</tt>.
+Очереди <tt>ssh_login</tt> присваивается более высокий приоритет чем очереди
+<tt>ssh_bulk</tt>, и на обеих включается ECN. Очереди <tt>ftp</tt>
+присваивается ширина канала равная 500Kbps и устанавливается приоритет 3. Эта
+очередь также может заимствовать ширину канала в случае доступности излишка и
+включается RED.
 
 <p>
-<b>NOTE:</b> Each child queue definition has its bandwidth specified.
-Without specifying the bandwidth, PF will give the queue 100% of the
-parent queue's bandwidth.
-In this situation, that would cause an error when the rules are loaded
-since if there's a queue with 100% of the bandwidth, no other queue can
-be defined at that level since there is no free bandwidth to allocate to
-it.
+<b>Прммечание:</b> В объявлении каждой дочерней очереди указывается ширина
+канала. Если ширина канала не указана, то PF отдаст этой очереди 100% от ширины
+канала родительской очереди.
+В этом случае, при загрузке правил возможна ошибка, так как имеется очередь,
+занимающая всю ширину канала и ни одна другая очередь не может быть объявлена
+на этом уровне, так как не осталось свободной ширины канала для ее размещения.
 
 <a name="assign"></a>
-<h3>Assigning Traffic to a Queue</h3>
+<h3>Привязка трафика к очереди</h3>
 <p>
-To assign traffic to a queue, the <tt>queue</tt> keyword is used in
-conjunction with PF's <a href="http://openbsd.org/faq/pf/filter.html">filter rules</a>. For example,
-consider a set of filtering rules containing a line such as:
+Для того, чтобы привязать трафик к очереди, необходимо иcпользовать ключевое
+слово <tt>queue</tt> в сочетании с правилами PF (<a href="http://openbsd.org/faq/pf/filter.html">filter rules</a>).
+Например, рассмотрим набор следующих правил фильтрации, содержащих такие строки как:
 <blockquote>
 <tt>pass out on fxp0 proto tcp to port 22</tt>
 </blockquote>
 
 <p>
-Packets matching that rule can be assigned to a specific queue by using
-the <tt>queue</tt> keyword:
+Пакеты, подпадающие под это правило можут быть привязаны к очереди с помощью
+ключевого слова <tt>queue</tt>:
 <blockquote>
 <tt>pass out on fxp0 proto tcp to port 22 queue ssh</tt>
 </blockquote>
@@ -691,10 +692,10 @@ local_net     = "192.168.0.0/24"
 ssh_ports     = "{ 22 2022 }"
 im_ports      = "{ 1863 5190 5222 }"
 
-# filter rules for fxp0 inbound
+# правила фильтра для fxp0 inbound
 block in on fxp0 all
 
-# filter rules for fxp0 outbound
+# правила фильтра для fxp0 outbound
 block out on fxp0 all
 pass  out on fxp0 inet proto tcp from (fxp0) queue(std_out, tcp_ack_out)
 pass  out on fxp0 inet proto { udp icmp } from (fxp0)
@@ -705,11 +706,11 @@ pass  out on fxp0 inet proto tcp from (fxp0) to port $ssh_ports \
 pass  out on fxp0 inet proto tcp from (fxp0) to port $im_ports \
 	queue(ssh_im_out, tcp_ack_out)
 
-# filter rules for dc0 inbound
+# правила фильтра для dc0 inbound
 block in on dc0 all
 pass  in on dc0 from $local_net
 
-# filter rules for dc0 outbound
+# правила фильтра для dc0 outbound
 block out on dc0 all
 pass  out on dc0 to $local_net
 pass  out on dc0 proto { tcp udp } from port domain to $local_net \
@@ -856,29 +857,29 @@ wwwserv   = "10.0.0.100"
 # default deny
 block on { fxp0, fxp1, dc0 } all
 
-# filter rules for fxp0 inbound
+# правила фильтра для fxp0 inbound
 pass in on fxp0 proto tcp from any to $wwwserv port { 21, \
 	&gt; 49151 } queue www_ext_misc
 pass in on fxp0 proto tcp from any to $wwwserv port 80 queue www_ext_http
 
-# filter rules for fxp0 outbound
+# правила фильтра для fxp0 outbound
 pass out on fxp0 from $int_nets
 pass out on fxp0 from $boss queue boss_ext
 
-# filter rules for dc0 inbound
+# правила фильтра для dc0 inbound
 pass in on dc0 from $int_nets
 pass in on dc0 from $it_net queue it_int
 pass in on dc0 from $boss queue boss_int
 pass in on dc0 proto tcp from $int_nets to $wwwserv port { 21, 80, \
 	&gt; 49151 } queue www_int
 
-# filter rules for dc0 outbound
+# правила фильтра для dc0 outbound
 pass out on dc0 from dc0 to $int_nets
 
-# filter rules for fxp1 inbound
+# правила фильтра для fxp1 inbound
 pass in on fxp1 proto { tcp, udp } from $wwwserv to port 53
 
-# filter rules for fxp1 outbound
+# правила фильтра для fxp1 outbound
 pass out on fxp1 proto tcp to $wwwserv port { 21, \
 	&gt; 49151 } queue net_dmz_misc
 pass out on fxp1 proto tcp to $wwwserv port 80 queue net_dmz_http
