@@ -331,9 +331,9 @@ RED случайным образом выбирает соединения, ч�
 
 <p>
 Алгоримт RED должен использоваться только с транспортными протоколами,
-способными распознать признаки перегрузки сети. В большинстве случаев
-это означает, что этот алгоритм должен использоваться для управления
-очередями трафика TCP, но не UPD или ICMP.
+способными распознать признаки перегрузки сети. В большинстве случаев это
+означает, что этот алгоритм должен использоваться для управления очередями
+трафика TCP, но не UPD или ICMP.
 
 <p>
 Для дополнительной информации, пожалуйста, ознакомьтесь с теорией RED по ссылке
@@ -373,9 +373,9 @@ RED случайным образом выбирает соединения, ч�
 Существует два вида директив, которые используются для настройки управления
 очередями:
 <ul>
-<li><tt>altq on</tt> - включает управление очередями на интерфейсе, определяет тип
-используемого планировщика и создает корневую очередь
-<li><tt>queue</tt> - объявляет свойства дочерней очереди
+<li><tt>altq on</tt> - включает управление очередями на интерфейсе, определяет
+тип используемого планировщика и создает корневую очередь <li><tt>queue</tt> -
+объявляет свойства дочерней очереди
 </ul>
 
 <p>
@@ -522,34 +522,35 @@ queue ftp bandwidth 500Kb priority 3 cbq(borrow red)<br>
 </blockquote>
 
 <p>
-Пакеты, подпадающие под это правило можут быть привязаны к очереди с помощью
+Пакеты, подпадающие под это правило, могут быть привязаны к очереди с помощью
 ключевого слова <tt>queue</tt>:
 <blockquote>
 <tt>pass out on fxp0 proto tcp to port 22 queue ssh</tt>
 </blockquote>
 
 <p>
-When a state table entry is created by this rule, PF will record
-the queue in the state table entry; this will be used for other packets
-permitted by the entry:
+Когда создается запись в таблице состояний по этому правилу, PF будет
+сохранять очередь в этой записи таблицы состояний. Эта же запись будет
+использоваться и для других пакетов разрешенных для нее:
+
 <blockquote>
 <tt>pass in on fxp0 proto tcp to port 80 queue http</tt>
 </blockquote>
-With this rule, packets traveling back out <tt>fxp0</tt> that match
-the stateful connection will end up in the <tt>http</tt> queue.
-Note that even though the <tt>queue</tt> keyword is being used
-on a rule filtering incoming traffic, the goal is to specify a queue
-for the corresponding outgoing traffic; the above rule does not queue
-incoming packets.
+По этому правилу пакеты, возвращающиеся назад на интерфейс <tt>fxp0</tt>, которые
+соответствуют установленным соединениям будут записаны в конец очереди
+<tt>http</tt>. Учтите, что даже при использовании ключевого
+слова <tt>queue</tt> для правила, фильтрующего входящий трафик, целью правила
+является определение очереди для соответствующего исходящего трафика. Правило,
+показанное выiе, не управляет очередью входящих пакетов.
 
 <p>
-When using the <tt>queue</tt> keyword with <tt>block</tt> directives, any
-resulting TCP RST or ICMP Unreachable packets are assigned to the specified
-queue.
+При использовании ключевого слова <tt>queue</tt> с директивой <tt>block</tt>
+любые результирующие пакеты TCP RST или пакеты ICMP Unreachable ставятся
+в указанную очередь.
 
 <p>
-Note that queue designation can happen on an interface other than the one
-defined in the <tt>altq on</tt> directive:
+Обратите внимание, что назначение очереди может произойти на интерфейсе,
+отличном от интерфейса, определенного в директиве <tt>altq on</tt>:
 <blockquote>
 <tt> 
 altq on fxp0 cbq bandwidth 2Mb queue { std, ftp }<br>
@@ -561,20 +562,21 @@ pass in on dc0 proto tcp to port 21 queue ftp<br>
 </blockquote>
 
 <p>
-Queueing is enabled on <tt>fxp0</tt> but the designation takes place
-on <tt>dc0</tt>. 
-If packets matching the <tt>pass</tt> rule (or the state created by
-this rule) exit from interface <tt>fxp0</tt>, they will be queued in
-the <tt>ftp</tt> queue. 
-This type of queueing can be very useful on routers.
+Управление очередью включено на интерфейсе <tt>fxp0</tt>, но назначение 
+происходит на интерфейс <tt>dc0</tt>.
+Если пакеты, соответствующие правилу <tt>pass</tt> (или состоянию, созданному
+этим правилом), выходят из интерфейса <tt>fxp0</tt>, то они будут поставлены в 
+очередь <tt>ftp</tt>.
+Этот тип управления очередями может быть очень полезен в роутерах.
 
 <p>
-Normally only one queue name is given with the <tt>queue</tt> keyword,
-but if a second name is specified that queue will be used for packets
-with a <a href="http://www.rfc-editor.org/rfc/rfc791.txt">Type of
-Service (ToS)</a> of low-delay and for TCP ACK packets with no data payload.
-A good example of this is found when using SSH. SSH login sessions will
-set the ToS to low-delay while SCP and SFTP sessions will not. PF can
+Обычно используется только одно имя очереди с ключевым словом <tt>queue</tt>
+, однако если определено второе имя, то эта очередь будет использована для 
+пакетов с <a href="http://www.rfc-editor.org/rfc/rfc791.txt">Type of
+Service (ToS)</a> low-delay и для пакетов TCP ACK без блока данных.
+Хорошим примером для этого может служить протокол SSH. Сессии логина SSH
+устанавливают ToS low-delay пока не начнутся сессии SCP или SFTP.
+PF can
 use this information to queue packets belonging to a login connection in a
 different queue than non-login connections. This can be useful to prioritize
 login connection packets over file transfer packets.
@@ -890,9 +892,9 @@ pass out on fxp1 proto tcp from $int_nets to $wwwserv port { 80, \
 </tbody></table>
 
 <p>
-[<a href="http://openbsd.org/faq/pf/anchors.html">Previous: Anchors</a>]
-[<a href="http://openbsd.org/faq/pf/index.html">Contents</a>]
-[<a href="http://openbsd.org/faq/pf/pools.html">Next: Address Pools and Load Balancing</a>]
+[<a href="http://openbsd.org/faq/pf/anchors.html">Предыдущая: Якоря</a>]
+[<a href="http://openbsd.org/faq/pf/index.html">Содержание</a>]
+[<a href="http://openbsd.org/faq/pf/pools.html">Следующая: Пулы адресов и балансировка нагрузки</a>]
 
 <p>
 <hr>
