@@ -728,9 +728,9 @@ pass  out on dc0 to $bob queue bob_in
 <a name="example2"></a>
 <h2>Пример #2: Сеть предприятия</h2>
 <pre>
-  ( IT Dept )  [ Boss's PC ]
+  ( Отдел IT ) [ PC босса ]
        |          |                                   T1
-     --+----+-----+---------- dc0 [ OpenBSD ] fxp0 -------- ( Internet )
+     --+----+-----+---------- dc0 [ OpenBSD ] fxp0 -------- ( Интернет )
             |                         fxp1
          [ COMP1 ]    [ WWW ]         /
                          |           / 
@@ -739,42 +739,44 @@ pass  out on dc0 to $bob queue bob_in
 </pre>
 
 <p>
-In this example, the OpenBSD host is acting as a firewall for a company
-network. The company runs a WWW server in the DMZ portion of their
-network where customers upload their websites via FTP. The IT department
-has their own subnet connected to the main network, and the boss has a PC
-on his desk that's used for email and surfing the web. The connection to
-the Internet is via a T1 line running at 1.5Mbps in both directions. All
-other network segments are using Fast Ethernet (100Mbps).
+В этом примере OpenBSD выступает в качестве файрвола корпоративной сети.
+На предприятии работают WWW-сервер в DMZ-сегменте сети, на который клиенты 
+загружают свои вебсайты по FTP, отдел IT, который имеет собственную подсеть,
+подключенную к основной сети и рабочая станция босса, которую он использует для
+электронной почты и веб-серфинга. Для подключения к интернету используется канал
+T1 со скоростью 1.5Mbps в обоих направлениях. Все остальные сегменты сети
+используют подключение Fast Ethernet (100Mbps).
 
 <p>
-The network administrator has decided on the following policy:
+Сетевой администратор решил использовать следующую сетевую политику:
 <ul>
-<li>Limit all traffic between the WWW server and the Internet to 500Kbps in
-each direction.
+<li>Ограничить весь трафик между WWW-сервером и интернетом скоростью в 500Kbps в
+обоих направлениях.
 	<ul>
-	<li>Allot 250Kbps to HTTP traffic.
-	<li>Allot 250Kbps to "other" traffic (i.e., non-HTTP traffic)
-	<li>Allow either queue to borrow up to the full 500Kbps.
-	<li>Give HTTP traffic between the WWW server and the Internet a
-	higher priority than other traffic between the WWW server and the
-	Internet (such as FTP uploads).
+	<li>Выделить 250Kbps для трафика HTTP.
+	<li>Выделить 250Kbps для "другого" (т.е., не-HTTP) трафика.
+	<li>Разрешить каждой из этих очередей заимствовать канал вплоть до полной
+	ширины в 500Kbps.
+	<li>Назначить высокий приоритет HTTP-трафику между WWW-сервером и Интернетом
+	по сравнению с другим трафиком между WWW-сервером и Интернетом (таким как
+	FTP-трафик для загрузок).
 	</ul>
-<li>Traffic between the WWW server and the internal network can use up
-to the full 100Mbps that the network offers.
-<li>Reserve 500Kbps for the IT Dept network so they can download the
-latest software updates in a timely manner. They should be able to use
-more than 500Kbps when extra bandwidth is available.
-<li>Give traffic between the boss's PC and the Internet a higher
-priority than other traffic to/from the Internet.
+<li>Трафик между WWW-сервером и внутренней сетью можно использовать вплоть до
+полной скорости в 100Mbps, которую позволяет сеть.
+<li>Зарезервировать 500Kbps для сети отдела IT, для того, чтобы они могли
+своевременно загружать обновления программного обеспечения. Они также могут
+использовать более чем 500Kbps, когда доступна дополнительная часть ширины
+канала.
+<li>Трафику между рабочей станцией босса и Интернетом присвоить больший
+приоритет, чем другому входящему/исходящему интернет-трафику.
 </ul>
 
 <p>
-Below is the ruleset that meets this network policy. Note that only the
-<tt>pf.conf</tt> directives that apply directly to the above policy are
-present; <a href="http://openbsd.org/faq/pf/nat.html"><tt>nat</tt></a>,
+Ниже приведен набор правил, который описывает эту сетевую политику.
+Отметим, что в <tt>pf.conf</tt> присутствуют только те директивы, которые 
+относятся непосредственно к указанной выше политике; <a href="http://openbsd.org/faq/pf/nat.html"><tt>nat</tt></a>,
 <a href="http://openbsd.org/faq/pf/rdr.html"><tt>rdr</tt></a>, <a href="http://openbsd.org/faq/pf/options.html">options</a>,
-etc., are not shown.
+и т.д., не показаны.
 
 <p>
 <table border="0" width="650">
@@ -855,32 +857,32 @@ dmz_net   = "10.0.0.0/24"
 boss      = "192.168.0.200"
 wwwserv   = "10.0.0.100"
 
-# default deny
+# запрет по умолчанию
 block on { fxp0, fxp1, dc0 } all
 
-# правила фильтра для fxp0 inbound
+# правила фильтра для входящих пакетов на интерфейсе  fxp0
 pass in on fxp0 proto tcp from any to $wwwserv port { 21, \
 	&gt; 49151 } queue www_ext_misc
 pass in on fxp0 proto tcp from any to $wwwserv port 80 queue www_ext_http
 
-# правила фильтра для fxp0 outbound
+# правила фильтра для исходящих пакетов на интерфейсе fxp0
 pass out on fxp0 from $int_nets
 pass out on fxp0 from $boss queue boss_ext
 
-# правила фильтра для dc0 inbound
+# правила фильтра для входящих пакетов на интерфейсе dc0
 pass in on dc0 from $int_nets
 pass in on dc0 from $it_net queue it_int
 pass in on dc0 from $boss queue boss_int
 pass in on dc0 proto tcp from $int_nets to $wwwserv port { 21, 80, \
 	&gt; 49151 } queue www_int
 
-# правила фильтра для dc0 outbound
+# правила фильтра для исходящих пакетов на интерфейсе dc0
 pass out on dc0 from dc0 to $int_nets
 
-# правила фильтра для fxp1 inbound
+# правила фильтра для входящих пакетов на интерфейсе fxp1
 pass in on fxp1 proto { tcp, udp } from $wwwserv to port 53
 
-# правила фильтра для fxp1 outbound
+# правила фильтра для исходящих пакетов на интерфейсе fxp1
 pass out on fxp1 proto tcp to $wwwserv port { 21, \
 	&gt; 49151 } queue net_dmz_misc
 pass out on fxp1 proto tcp to $wwwserv port 80 queue net_dmz_http
