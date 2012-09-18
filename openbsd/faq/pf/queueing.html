@@ -574,110 +574,109 @@ pass in on dc0 proto tcp to port 21 queue ftp<br>
 , однако если определено второе имя, то эта очередь будет использована для 
 пакетов с <a href="http://www.rfc-editor.org/rfc/rfc791.txt">Type of
 Service (ToS)</a> low-delay и для пакетов TCP ACK без блока данных.
-Хорошим примером для этого может служить протокол SSH. Сессии логина SSH
+Хорошим примером для этого может служить протокол SSH. Сессии login SSH
 устанавливают ToS low-delay пока не начнутся сессии SCP или SFTP.
-PF can
-use this information to queue packets belonging to a login connection in a
-different queue than non-login connections. This can be useful to prioritize
-login connection packets over file transfer packets.
+PF может использовать эту информацию для распределения пакетов login-соединения
+и не login-соединения по разным очередям. Это может быть полезно для 
+приоретизации login-соединения над пакетами передачи файлов.
 <blockquote>
 <tt>pass out on fxp0 from any to any port 22 queue(ssh_bulk, ssh_login)</tt>
 </blockquote>
 
 <p>
-This assigns packets belonging to SSH login connections to the
-<tt>ssh_login</tt> queue and packets belonging to SCP and SFTP
-connections to the <tt>ssh_bulk</tt> queue. SSH login connections will
-then have their packets processed ahead of SCP and SFTP connections
-because the <tt>ssh_login</tt> queue has a higher priority.
+Это правило направляет пакеты, принадлежащие соединению SSH login в очередь
+<tt>ssh_login</tt>, а пакеты, принадлежащие соединениям SCP и SFTP в очередь
+<tt>ssh_bulk</tt>. Пакеты соединения SSH login бужут иметь возможность быть 
+обработанными раньше пакетов соединения SCP и SFTP, потому что очередь
+<tt>ssh_login</tt> имеет больший приоритет.
 
 <p>
-Assigning TCP ACK packets to a higher priority queue is useful on
-asymmetric connections, that is, connections that have different upload
-and download bandwidths such as ADSL lines. With an ADSL line, if the
-upload channel is being maxed out and a download is started, the
-download will suffer because the TCP ACK packets it needs to
-send will run into congestion when they try to pass through the upload
-channel. Testing has shown that to achieve the best results, the
-bandwidth on the upload queue should be set to a value less than what
-the connection is capable of. For instance, if an ADSL line has a max
-upload of 640Kbps, setting the root queue's <tt>bandwidth</tt> to a value
-such as 600Kb should result in better performance. Trial and error will
-yield the best <tt>bandwidth</tt> setting.
+Присваивание пакетам TCP ACK большего приоритета полезно для асимметричных
+соединений, т.е. соединений, которые имеют разную входящую и исходящую ширину
+канала, например линий ADSL. В применении к ADSL соединению: если начата
+загрузка, а исходящий канал перегружен, то загрузка будет заторможена, так как
+пакеты TCP ACK попадут в "пробку", чтобы пробиться наружу через исходящий канал.
+Тестирование показало, что для достижения наилучшего результата, значение ширины
+канала исходящей очереди должно быть меньше, чем полная пропускная способность
+канала. Напрмер, если ADSL линия имеет исходящую скорость 640Kbps, то установка
+значения <tt>ширины канала</tt> корневой очереди в 600Kb должно привести к
+повышению производительности. Методом проб и ошибок можно будет подобрать
+наилучшую настройку <tt>ширины канала</tt>.
 
 <a name="example1"></a>
-<h2>Example #1: Small, Home Network</h2>
+<h2>Пример #1: Малая, домашняя сеть</h2>
 <pre>  
-    [ Alice ]    [ Charlie ]
+    [ Алиса ]     [ Чарли ]
         |             |                              ADSL
-     ---+-----+-------+------ dc0 [ OpenBSD ] fxp0 -------- ( Internet )
+     ---+-----+-------+------ dc0 [ OpenBSD ] fxp0 -------- ( Интернет )
               |
-           [ Bob ]
+           [ Боб ]
 
 </pre>
 
 <p>
-In this example, OpenBSD is being used on an Internet gateway for a small
-home network with three workstations. The gateway is performing packet
-filtering and NAT duties. The Internet connection is via an ADSL line
-running at 2Mbps down and 640Kbps up.
+В этом примере OpenBSD используется как Интернет-шлюз для малой домашней сети,
+состоящей из трех рабочих станций. Шлюз выполняет роль фильтра пакетов и 
+обязанности транслятора NAT. Интернет подключен с помощью линии ADSL с входящей
+скоростью 2Mbps и исходящей скоростью 640Kbps.
 
 <p>
-The queueing policy for this network:
+Политика очередей для этой сети:
 <ul>
-<li>Reserve 80Kbps of download bandwidth for Bob so he can play his
-online games without being lagged by Alice or Charlie's downloads. Allow
-Bob to use more than 80Kbps when it's available.
-<li>Interactive SSH and instant message traffic will have a higher
-priority than regular traffic.
-<li>DNS queries and replies will have the second highest priority.
-<li>Outgoing TCP ACK packets will have a higher priority than all other
-outgoing traffic.
+<li> Резервируем 80Kbps входящей ширины канала Бобу, чтобы он мог играть в свои
+online игры без задержек независимо от загрузок Алисы или Чарли. Разрешим Бобу
+использовать более 80Kbps когда это возможно.
+<li>Интерактивный трафик SSH и трафик клиетов IM будут иметь больший приоритет
+чем обычный трафик.
+<li>Запросы и ответы DNS будут иметь второй наивысший приоритет.
+<li>Исходящие пакеты TCP ACK будут иметь больший приоритет, чем весь другой
+исходящий трафик.
 </ul>
 
 <p>
-Below is the ruleset that meets this network policy. Note that only the
-<tt>pf.conf</tt> directives that apply directly to the above policy are
-present.
+Ниже приведен набор правил, который описывает эту сетевую политику.
+Отметим, что в <tt>pf.conf</tt> присутствуют только те директивы, которые 
+относятся непосредственно к указанной выше политике.
 
 <p>
 <table border="0" width="650">
 <tbody><tr><td nowrap="" bgcolor="#EEEEEE">
-<pre># enable queueing on the external interface to control traffic going to
-# the Internet. use the priq scheduler to control only priorities. set
-# the bandwidth to 610Kbps to get the best performance out of the TCP
-# ACK queue.
+<pre># разрешаем управление очередями на внешнем сетевом интерфейсе для
+# управления исходящим интернет трафиком. используем плинировщик priq для
+# управления только на основе приоритетов. устанавливаем ширину канала равной
+# 610Kbps для обеспечения наилучшей производительности при отправке очереди 
+# пакетов TCP ACK.
 
 altq on fxp0 priq bandwidth 610Kb queue { std_out, ssh_im_out, dns_out, \
 	tcp_ack_out }
 
-# define the parameters for the child queues.
-# std_out      - the standard queue. any filter rule below that does not
-#                explicitly specify a queue will have its traffic added
-#                to this queue.
-# ssh_im_out   - interactive SSH and various instant message traffic.
-# dns_out      - DNS queries.
-# tcp_ack_out  - TCP ACK packets with no data payload.
+# определяем параметры дочерних очередей
+# std_out      - стандартная очередь. любые правила фильтра, указанные ниже,
+#                которые не определяют явно очередь, будут направлять свой
+#                трафик в эту очередь.
+# ssh_im_out   - интерактивный трафик SSH и трафик различных IM клиентов.
+# dns_out      - запросы DNS.
+# tcp_ack_out  - пакеты TCP ACK без блока данных.
 
 queue std_out     priq(default)
 queue ssh_im_out  priority 4 priq(red)
 queue dns_out     priority 5
 queue tcp_ack_out priority 6
 
-# enable queueing on the internal interface to control traffic coming in
-# from the Internet. use the cbq scheduler to control bandwidth. max
-# bandwidth is 2Mbps.
+# разрешаем управление очередями на внутреннем интерфейсе для управления
+# трафиком, поступающим из интернет. используем планировщик cbq для управления
+# шириной канала. устанавливаем максимальную ширину канала 2Mbps.
 
 altq on dc0 cbq bandwidth 2Mb queue { std_in, ssh_im_in, dns_in, bob_in }
 
-# define the parameters for the child queues.
-# std_in      - the standard queue. any filter rule below that does not
-#               explicitly specify a queue will have its traffic added
-#               to this queue.
-# ssh_im_in   - interactive SSH and various instant message traffic.
-# dns_in      - DNS replies.
-# bob_in      - bandwidth reserved for Bob's workstation. allow him to
-#               borrow.
+# определяем параметры дочерних очередей
+# std_in      - стандартная очередь. любые правила фильтра, указанные ниже,
+#               которые не определяют явно очередь, будут направлять свой трафик
+#               в эту очередь.
+# ssh_im_in   - интерактивный трафик SSH и трафик различных IM клиентов.
+# dns_in      - ответы DNS.
+# bob_in      - ширина канала, резервируемая для рабочей станции Боба. разрешаем
+#               ему заимствовать канал.
 
 queue std_in    bandwidth 1.6Mb cbq(default)
 queue ssh_im_in bandwidth 200Kb priority 4
@@ -685,7 +684,7 @@ queue dns_in    bandwidth 120Kb priority 5
 queue bob_in    bandwidth 80Kb cbq(borrow)
 
 
-# ... in the filtering section of pf.conf ...
+# ... раздел фильтров pf.conf ...
 
 alice         = "192.168.0.2"
 bob           = "192.168.0.3"
@@ -694,10 +693,10 @@ local_net     = "192.168.0.0/24"
 ssh_ports     = "{ 22 2022 }"
 im_ports      = "{ 1863 5190 5222 }"
 
-# правила фильтра для fxp0 inbound
+# правила фильтра для входящих пакетов на интерфейсе fxp0
 block in on fxp0 all
 
-# правила фильтра для fxp0 outbound
+# правила фильтра для исходящих пакетов на интерфейсе fxp0
 block out on fxp0 all
 pass  out on fxp0 inet proto tcp from (fxp0) queue(std_out, tcp_ack_out)
 pass  out on fxp0 inet proto { udp icmp } from (fxp0)
@@ -708,11 +707,11 @@ pass  out on fxp0 inet proto tcp from (fxp0) to port $ssh_ports \
 pass  out on fxp0 inet proto tcp from (fxp0) to port $im_ports \
 	queue(ssh_im_out, tcp_ack_out)
 
-# правила фильтра для dc0 inbound
+# правила фильтра для входящих пакетов на интерфейсе dc0
 block in on dc0 all
 pass  in on dc0 from $local_net
 
-# правила фильтра для dc0 outbound
+# правила фильтра для исходящих пакетов на интерфейсе dc0
 block out on dc0 all
 pass  out on dc0 to $local_net
 pass  out on dc0 proto { tcp udp } from port domain to $local_net \
@@ -727,7 +726,7 @@ pass  out on dc0 to $bob queue bob_in
 </tbody></table>
 
 <a name="example2"></a>
-<h2>Example #2: Company Network</h2>
+<h2>Пример #2: Сеть предприятия</h2>
 <pre>
   ( IT Dept )  [ Boss's PC ]
        |          |                                   T1
