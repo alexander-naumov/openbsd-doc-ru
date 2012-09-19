@@ -109,7 +109,7 @@ please, use a max of 72 chars per line -->
 
 <p>
 Опция <tt>sticky-address</tt> может быть использована с пулами типа
-<tt>random</tt> и <tt>циклического</tt>типа для обеспечения того условия,
+<tt>random</tt> и <tt>циклического</tt> типа для обеспечения того условия,
 что адрес источника всегда будет соотнесен тому же адресу перенаправления.
 
 <a name="nat"></a>
@@ -186,8 +186,8 @@ match in on $ext_if proto tcp to port 80 rdr-to $web_servers \<br>
 когда невозможно использовать правильный протокол multipath-маршрутизации
 (например
 <a href="http://www.rfc-editor.org/rfc/rfc1771.txt">BGP4</a>).
-При использовании <tt>route-to</tt> с адресным пулом <tt>циклического</tt> типа
-исходящие соединения могут быть равномернораспределены между несколькими 
+При использовании <tt>route-to</tt> с адресным пулом <tt>циклического</tt>
+типа исходящие соединения могут быть равномернораспределены между несколькими 
 исходящими маршрутами.
 
 <p>
@@ -308,7 +308,7 @@ pass out on $ext_if2 from $ext_if1 route-to ($ext_if1 $ext_gw1)
 <small>
 <!--
 Originally [OpenBSD: pools.html,v 1.31 ]<br>
-$Translation: pools.html,v 1.5 2012/08/21 20:56:28 alex Exp $<br>
+$Translation: pools.html,v 1.6 2012/09/19 19:30:41 alex Exp $<br>
 -->
 $OpenBSD$
 </small>

@@ -36,9 +36,9 @@ please, use a max of 72 chars per line -->
 <img alt="[OpenBSD]" height="30" width="141" src="./queueing_o_files/smalltitle.gif" border="0">
 </a>
 <p>
-[<a href="http://openbsd.org/faq/pf/anchors.html">Предыдущая: Якоря</a>]
-[<a href="http://openbsd.org/faq/pf/index.html">Содержание</a>]
-[<a href="http://openbsd.org/faq/pf/pools.html">Следующая: Пулы адресов и балансировка нагрузки</a>]
+[<a href="anchors.html">Предыдущая: Якоря</a>]
+[<a href="index.html">Содержание</a>]
+[<a href="pools.html">Следующая: Пулы адресов и балансировка нагрузки</a>]
 
 <p>
 <h1><font color="#e00000">PF: Управление очередями пакетов и приоритезация</font></h1>
@@ -349,7 +349,8 @@ RED случайным образом выбирает соединения, ч�
 <a name="altq"></a>
 <h2>Настройка очередей</h2>
 Начиная с OpenBSD 3.0 реализация управления очередями
-<a href="http://www.csl.sony.co.jp/person/kjc/kjc/software.html#ALTQ">Alternate Queueing (ALTQ)</a>
+<a href="http://www.csl.sony.co.jp/person/kjc/kjc/software.html#ALTQ">
+Alternate Queueing (ALTQ)</a>
 является частью основной системы. Начиная с OpenBSD 3.3 ALTQ была встроена 
 в PF. Реализация ALTQ в OpenBSD поддерживает управление очередями, основанное
 на классах (CBQ) и управление очередями, основанное на приоритетах (PRIQ).
@@ -363,7 +364,8 @@ RED случайным образом выбирает соединения, ч�
 
 <p>
 Управление очередями настраивается в <tt>
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf.conf&sektion=5&manpath=OpenBSD+5.1">pf.conf</a></tt>.
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf.conf&sektion=5&manpath=OpenBSD+5.1">
+pf.conf</a></tt>.
 Существует два вида директив, которые используются для настройки управления
 очередями:
 <ul>
@@ -510,7 +512,8 @@ queue ftp bandwidth 500Kb priority 3 cbq(borrow red)<br>
 <h3>Привязка трафика к очереди</h3>
 <p>
 Для того, чтобы привязать трафик к очереди, необходимо иcпользовать ключевое
-слово <tt>queue</tt> в сочетании с правилами PF (<a href="http://openbsd.org/faq/pf/filter.html">filter rules</a>).
+слово <tt>queue</tt> в сочетании с правилами PF
+(<a href="http://openbsd.org/faq/pf/filter.html">filter rules</a>).
 Например, рассмотрим набор следующих правил фильтрации, содержащих такие строки как:
 <blockquote>
 <tt>pass out on fxp0 proto tcp to port 22</tt>
@@ -565,8 +568,8 @@ pass in on dc0 proto tcp to port 21 queue ftp<br>
 Этот тип управления очередями может быть очень полезен в роутерах.
 
 <p>
-Обычно используется только одно имя очереди с ключевым словом <tt>queue</tt>
-, однако если определено второе имя, то эта очередь будет использована для 
+Обычно используется только одно имя очереди с ключевым словом <tt>queue</tt>,
+однако если определено второе имя, то эта очередь будет использована для 
 пакетов с <a href="http://www.rfc-editor.org/rfc/rfc791.txt">Type of
 Service (ToS)</a> low-delay и для пакетов TCP ACK без блока данных.
 Хорошим примером для этого может служить протокол SSH. Сессии login SSH
@@ -769,8 +772,10 @@ T1 со скоростью 1.5Mbps в обоих направлениях. Вс�
 <p>
 Ниже приведен набор правил, который описывает эту сетевую политику.
 Отметим, что в <tt>pf.conf</tt> присутствуют только те директивы, которые 
-относятся непосредственно к указанной выше политике; <a href="http://openbsd.org/faq/pf/nat.html"><tt>nat</tt></a>,
-<a href="http://openbsd.org/faq/pf/rdr.html"><tt>rdr</tt></a>, <a href="http://openbsd.org/faq/pf/options.html">options</a>,
+относятся непосредственно к указанной выше политике;
+<a href="http://openbsd.org/faq/pf/nat.html"><tt>nat</tt></a>,
+<a href="http://openbsd.org/faq/pf/rdr.html"><tt>rdr</tt></a>,
+<a href="http://openbsd.org/faq/pf/options.html">options</a>,
 и т.д., не показаны.
 
 <p>
@@ -890,17 +895,22 @@ pass out on fxp1 proto tcp from $int_nets to $wwwserv port { 80, \
 </tbody></table>
 
 <p>
-[<a href="http://openbsd.org/faq/pf/anchors.html">Предыдущая: Якоря</a>]
-[<a href="http://openbsd.org/faq/pf/index.html">Содержание</a>]
-[<a href="http://openbsd.org/faq/pf/pools.html">Следующая: Пулы адресов и балансировка нагрузки</a>]
+[<a href="anchors.html">Предыдущая: Якоря</a>]
+[<a href="index.html">Содержание</a>]
+[<a href="pools.html">Следующая: Пулы адресов и балансировка нагрузки</a>]
 
 <p>
 <hr>
-<a href="http://openbsd.org/faq/pf/index.html"><img height="24" width="24" src="./queueing_o_files/back.gif" border="0" alt="[back]"></a> 
+<a href="index.html"><img height="24" width="24" src="../../../images/back.gif" border="0" alt="[back]"></a> 
 <a href="mailto:www@openbsd.org">www@openbsd.org</a>
 <br>
-<small>$OpenBSD: queueing.html,v 1.43 2012/05/11 11:20:04 nick Exp $</small>
-
-
+<small>
+<!--
+Originally [OpenBSD: queueing.html,v 1.43 ]<br>
+$Translation: queueing.html,v 1.5 2012/09/19 19:44:49 alex Exp $<br>
+-->
+$OpenBSD$
+</small>
  
-</body><link rel="stylesheet" type="text/css" href="data:text/css,"></html>
+</body>
+</html>
