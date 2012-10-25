@@ -147,8 +147,8 @@ pass in proto tcp from 192.0.2.4 to any port { 80 443 }<br>
 </blockquote>
 
 <p>
-To load rules directly from the main ruleset, enclose the anchor rules
-in a brace-delimited block:
+Для загрузки правил непосредственно из основного набора правил необходимо
+заключить их в блок, ограниченный скобками:
 
 </p><blockquote>
 <tt>
@@ -159,7 +159,7 @@ anchor "goodguys" { <br>
 </blockquote>
 
 <p>
-Inline anchors can also contain more anchors.
+Якоря, определенные inline, могут также содержать другие якоря.
 
 </p><blockquote>
 <tt>
@@ -174,18 +174,20 @@ anchor "goodguys" { <br>
 </tt>
 </blockquote>
 
-With inline anchors the name of the anchor becomes optional.
-Note how the nested anchor in the above example does not have a name.
-Also note how the macro <tt>$allow</tt> is created outside of the anchor
-(in the main ruleset) and is then used within the anchor.
+При определении inline якоря имя якоря становится необязательным.
+Заметьте, что в вышеописанном примере у вложенного якоря имя не задано.
+Также заметьте, что макро <tt>$allow</tt> создано вне якоря (в основном наборе
+правил) и затем используется в самом якоре.
 
 <p>
-Rules can be loaded into an anchor using the same syntax and options
-as rules loaded into the main ruleset.
+Правила могут быть загружены в якорь используя такой же синтаксис и параметры,
+как и правила загруженные в основной набор правил.
+Однако, одно предостережение,
 One caveat, however, is that unless you're using inline anchors any 
-<a href="http://www.openbsd.org/faq/pf/macros.html">macros</a> that are used must also be defined 
-within the anchor itself; macros that are defined in the parent ruleset
-are <i>not</i> visible from the anchor.
+<a href="http://www.openbsd.org/faq/pf/macros.html">macros</a> that are used 
+must also be defined within the anchor itself; 
+макросы, которые определены в родительском наборе правил <i>не</i> будут видимы
+из якоря.
 
 </p><p>
 Since anchors can be nested, it's possible to specify that all child
