@@ -110,12 +110,12 @@ rthreads уровня ядра, что позволяет многопоточн
     <ul>
     <li>Увеличение начального окна TCP до 14600 байтов как предлагалось в 
         draft-ietf-tcpm-initcwnd.
-    <li>Cleanup handling of sockaddrs in degenerate use cases.
-    <li>Improved handling of error and limit cases in file descriptor passing.
-    <li>Improved socketbuffer handling for AF_UNIX sockets.
-    <li>Fix yet another file descriptor leak in message passing.
-    <li>Improved error handling in socket splicing.
-    <li>IPv6 privacy addresses now appear alongside SLAAC addresses.
+    <li>Очистка обработки sockaddrs в случаях порчи.
+    <li>Улучшенная обработка ошибок и ограничение передачи файловых дескрипторов.
+    <li>Улучшенная обработка socketbuffer для AF_UNIX сокетов.
+    <li>Исправлена еще одна утечка файловых дескрипторов в передаче сообщений.
+    <li>Улучшена обработка ошибок в сокет splicing.
+    <li>Частные адреса IPv6 уже появляются вместе с SLAAC адресами.
     <li>Support for Extended Sequence Numbers has been added to the IPsec stack and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iked&amp;sektion=8">iked(8)</a>.
     <li>Bridging two IPv4 networks over an IPv6 link with <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gif&amp;sektion=4">gif(4)</a> is now possible.
     </ul>
