@@ -77,7 +77,7 @@ rthreads уровня ядра, что позволяет многопоточн
     <li>Добавлена поддержка "живой" много-поточной отладки в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gdb&amp;sektion=1">gdb(1)</a>.
     <li>Улучшена обработка <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getrusage&amp;sektion=2">rusage</a> полностью и <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getitimer&amp;sektion=2">interval timers</a> в threaded процессах.
     <li>Изменены RLIMIT_NPROC <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getrlimit&amp;sektion=2">rlimit</a> расчета процессов вместо потоков.
-    <li>Добавлены новые системные ограничения <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8">kern.maxthread</a> максимальных количества потоков.
+    <li>Добавлены новые системные ограничения <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8">kern.maxthread</a> максимального количества потоков.
     <li>Прекращена конкуренция в создании потоков и в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fork&amp;sektion=2">fork(2)</a> и в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=open&amp;sektion=2">open(2)</a> в потоковых процессах.
     <li>Улучшена обработка потоковых процессов в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ps&amp;sektion=1">ps(1)</a>, <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=top&amp;sektion=1">top(1)</a>, and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fstat&amp;sektion=1">fstat(1)</a>.
     <li>Изменена блокировка вокруг <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dlfcn&amp;sektion=3">dlopen()</a> рекурсивно, как в операции dl*() из <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=atexit&amp;sektion=3">atexit()</a> обработчик взаимной блокировки.
@@ -116,12 +116,12 @@ rthreads уровня ядра, что позволяет многопоточн
     <li>Исправлена еще одна утечка файловых дескрипторов в передаче сообщений.
     <li>Улучшена обработка ошибок в сокет splicing.
     <li>Частные адреса IPv6 уже появляются вместе с SLAAC адресами.
-    <li>Support for Extended Sequence Numbers has been added to the IPsec stack and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iked&amp;sektion=8">iked(8)</a>.
-    <li>Bridging two IPv4 networks over an IPv6 link with <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gif&amp;sektion=4">gif(4)</a> is now possible.
+    <li>В стек IPsec добавлена поддержка Расширенных Порядковых Номеров и в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iked&amp;sektion=8">iked(8)</a>.
+    <li>Стало возможным установление моста между двумя IPv4 сетями через IPv6 соединение с <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gif&amp;sektion=4">gif(4)</a>.
     </ul>
 <p>
 
-<li>Routing daemons and other userland network improvements:
+<li>Маршрутизация демонов и другие улучшения пользовательских сетевых возможностей:
     <ul>
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=aucat&amp;sektion=1">sndiod(1)</a>,
          <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a>,
@@ -139,54 +139,53 @@ rthreads уровня ядра, что позволяет многопоточн
          <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=snmpd&amp;sektion=8">snmpd(8)</a>,
          <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=spamd&amp;sektion=8">spamd(8)</a>,
          <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>,
-         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpbench&amp;sektion=1">tcpbench(1)</a> and
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpbench&amp;sektion=1">tcpbench(1)</a> и
          <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1">tmux(1)</a>
-         now rate limit their accepting of new connections when experiencing file descriptor exhaustion.
-    <li>Allow <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=route&amp;sektion=8">route(8)</a> destination/prefixlen syntax for IPv6 routes.
-    <li>ASCII packet dumping support in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpdump&amp;sektion=8">tcpdump(8)</a>.
-    <li>Better etherip and BGP protocol support in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpdump&amp;sektion=8">tcpdump(8)</a>.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isakmpd&amp;sektion=8">isakmpd(8)</a> and
+         сейчас ограничивают принятие новых подключений при истощении файловых дескрипторов.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=route&amp;sektion=8">route(8)</a> допускает синтаксис destination/prefixlen для маршрутов IPv6.
+    <li>Поддержка дампинга ASCII пакетов в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpdump&amp;sektion=8">tcpdump(8)</a>.
+    <li>Улучшена поддержка etherip и BGP протокола в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpdump&amp;sektion=8">tcpdump(8)</a>.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isakmpd&amp;sektion=8">isakmpd(8)</a> и
 	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcpdump&amp;sektion=8">tcpdump(8)</a>
-         now recognize additional Internet Key Exchange DH groups.
-    <li>Various improvements in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iked&amp;sektion=8">iked(8)</a>
-	including support for retransmits.
+         сейчас признают дополнительно Internet Key Exchange DH groups.
+    <li>Различные улучшения в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iked&amp;sektion=8">iked(8)</a>
+	включая поддержу для повторной передачи.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ipsecctl&amp;sektion=8">ipsecctl(8)</a>
-         now allows SA lifetimes to be specified in its
-         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ipsec.conf&amp;sektion=5">ipsec.conf(5)</a>
-         file.
-    <li>Rewrote <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tftpd&amp;sektion=8">tftpd(8)</a> as a persistent, non-blocking daemon.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tftp&amp;sektion=1">tftp(1)</a> client now supports IPv6.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=snmpd&amp;sektion=8">snmpd(8)</a> now supports PF-MIB, UCD-DISKIO-MIB, and
-	additional OIDs in HOST-RESOURCES-MIB.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a> is now more robust to network instability.
-    <li>Adjust the <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a> route decision code to cover checks needed due to route reflection.
-    <li>Various fixes to improve error reporting in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a> including support of RFC 6608.
-    <li>For debugging purposes <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpctl&amp;sektion=8">bgpctl(8)</a> can load MRT dumps into <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a>.
-    <li>Fixed distribution of MPLS VPN routes in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a>.
-    <li>Introduced a new option "selected" to the <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpctl&amp;sektion=8">bgpctl(8)</a> "show rib" command to show only selected routes.
-    <li>Correctly support the LSA_TYPE_AREA_OPAQ and LSA_TYPE_AS_OPAQ types in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ospfd&amp;sektion=8">ospfd(8)</a>.
-    <li>Make <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=relayd&amp;sektion=8">relayd(8)</a> able to handle transactions larger than 2GB in size.
-    <li>Various bug fixes and better HTTP standard compliance in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=relayd&amp;sektion=8">relayd(8)</a>.
+         сейчас позволяет определение время жизни SA в файле
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ipsec.conf&amp;sektion=5">ipsec.conf(5)</a>.
+    <li>Переписан <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tftpd&amp;sektion=8">tftpd(8)</a> как устойчивый, неблокируемый демон.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tftp&amp;sektion=1">tftp(1)</a> клиент сейчас поддерживает IPv6.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=snmpd&amp;sektion=8">snmpd(8)</a> сейчас поддерживает PF-MIB, UCD-DISKIO-MIB, и
+	дополнительно OID в HOST-RESOURCES-MIB.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a> теперь более устойчиво к нестабильностям сети.
+    <li>Отрегулирован в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a> код выбора маршрутов для выполнения необходимых проверок за счет отражения маршрутов.route 
+    <li>Различные исправления для улучшения отчетов об ошибках в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a> включая поддержку RFC 6608.
+    <li>С целью отладки <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpctl&amp;sektion=8">bgpctl(8)</a> может загружать MRT дампы в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a>.
+    <li>Исправлено распределение маршрутов MPLS VPN в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpd&amp;sektion=8">bgpd(8)</a>.
+    <li>Введена новая опция "selected" в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgpctl&amp;sektion=8">bgpctl(8)</a> комманда "show rib" показывает только выбранные маршруты.
+    <li>Корректная поддержка LSA_TYPE_AREA_OPAQ и LSA_TYPE_AS_OPAQ в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ospfd&amp;sektion=8">ospfd(8)</a>.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=relayd&amp;sektion=8">relayd(8)</a> в состоянии обрабатывать транзакции размером больше 2 Гб.
+    <li>Различные исправления и улучшения в части соответствия стандарту HTTP в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=relayd&amp;sektion=8">relayd(8)</a>.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rtadvd&amp;sektion=8">rtadvd(8)</a>
-	can now advertise DNS servers and search paths in router advertisements.
+	теперь может распространять DNS серверы и искать пути в объявлениях маршрутизатора.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rtadvd&amp;sektion=8">rtadvd(8)</a>
-	can now send router advertisements with no prefix information using the noifprefix option.
+	теперь может отправлять сообщения маршрутизатора без информационного префикса используя опцию noifprefix.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftp&amp;sektion=1">ftp(1)</a>
-	client now allows the source IP address of the connection to be specified.
+	клиент теперь позволяет указывать IP адрес источника соеднинения.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypldap&amp;sektion=8">ypldap(8)</a>
-	now handles larger directories and is more tolerant when processing groups.
-    <li>Added support for AF_INET6 to <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=inet_net_pton&amp;sektion=3">inet_net_pton(3)</a> and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=inet_net_ntop&amp;sektion=3">inet_net_ntop(3)</a>.
+	теперь поддерживает большие каталоги и более терпимо обрабатывает группы.
+    <li>Добавлена поддержка AF_INET6 в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=inet_net_pton&amp;sektion=3">inet_net_pton(3)</a> и <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=inet_net_ntop&amp;sektion=3">inet_net_ntop(3)</a>.
     </ul>
 <p>
 
-<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a> improvements:
+<li>Улучшения <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a>:
     <ul>
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a> now ignores/preserves the lower 2 bits of the tos-header (used for Explicit Congestion Notification).
-    <li>Allow more than 16 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pflog&sektion=4">pflog(4)</a> interfaces.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a> now supports weighted least-states load balancing.
-    <li>The prio and tos options are now part of the "set { }" block.
-        See <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf.conf&amp;sektion=5">pf.conf(5)</a>.
-    <li>Allow to set the tos on IPv6 packets.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a> теперь игнорирует/сохраняет нижние 2 бита TOS-заголовка (используется для Явного уведомления о перегрузке (Explicit Congestion Notification)).
+    <li>Позволяет более 16 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pflog&sektion=4">pflog(4)</a> интерфейсов.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a> теперь поддерживает взвешенную least-states балансировку нагрузки.
+    <li>Опции prio и tos теперь являются частью блока "set { }".
+        Более подробно в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf.conf&amp;sektion=5">pf.conf(5)</a>.
+    <li>Разрешает устанавливать tos в IPv6 пакетах.
     <li>Better demotion handling in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pfsync&amp;sektion=4">pfsync(4)</a> to prevent failovers without having a full state table.
     <li>Fixed printing of wildcard anchors in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pfctl&amp;sektion=8">pfctl(8)</a>.
     </ul>
@@ -333,7 +332,7 @@ the package build process:
 	</ul>
     </ul>
 <p>
-<li>Many pre-built packages for each architecture:
+<li>Большое количество собранных пакетов для различных архитектур:
     <table border=0 cellspacing=0 cellpadding=2 width="95%">
     <tr>
     <td valign="top" width="25%">
@@ -356,43 +355,43 @@ the package build process:
   </ul></td></tr></table>
 <p>
 
-<li>Some highlights:
+<li>Основной состав выпуска:
     <ul>
     <li>GNOME 3.4.2			<li>KDE 3.5.10
     <li>Xfce 4.10			<li>MySQL 5.1.63
     <li>PostgreSQL 9.1.4		<li>Postfix 2.9.3
-    <li>OpenLDAP 2.3.43 and 2.4.31	<li>Mozilla Firefox 3.5.19, 3.6.28 and 13.0.1
+    <li>OpenLDAP 2.3.43 и 2.4.31	<li>Mozilla Firefox 3.5.19, 3.6.28 и 13.0.1
     <li>Mozilla Thunderbird 13.0.1	<li>GHC 7.0.4
-    <li>LibreOffice 3.5.5.3		<li>Emacs 21.4, 22.3 and 23.4
-    <li>Vim 7.3.154			<li>PHP 5.2.17 and 5.3.14
-    <li>Python 2.5.4, 2.7.3 and 3.2.3	<li>Ruby 1.8.7.370 and 1.9.3.194
+    <li>LibreOffice 3.5.5.3		<li>Emacs 21.4, 22.3 и 23.4
+    <li>Vim 7.3.154			<li>PHP 5.2.17 и 5.3.14
+    <li>Python 2.5.4, 2.7.3 и 3.2.3	<li>Ruby 1.8.7.370 и 1.9.3.194
     <li>Tcl/Tk 8.5.11			<li>Jdk 1.7
     <li>Mono 2.10.9			<li>Chromium 20.0.1132.57
     <li>Groff 1.21			<li>Go 1.0.2
-    <li>GCC 4.6.3 and 4.7.1		<li>LLVM/Clang 3.1
-    <li>Lua 5.1.5 and 5.2.1
+    <li>GCC 4.6.3 и 4.7.1		<li>LLVM/Clang 3.1
+    <li>Lua 5.1.5 и 5.2.1
     </ul>
 <p>
 
-<li>As usual, steady improvements in manual pages and other documentation.
+<li>Как обычно, постоянные улучшения страниц руководства (manual pages) и другой документации.
 <p>
 
-<li>The system includes the following major components from outside suppliers:
+<li>Система включает следующие основные компоненты сторонних разработчиков:
     <ul>
-    <li>Xenocara (based on X.Org 7.7 with xserver 1.12.2 + patches,
+    <li>Xenocara (основана на X.Org 7.7 с xserver 1.12.2 + patches,
       freetype 2.4.10, fontconfig 2.8.0, Mesa 7.10.3, xterm 279,
-      xkeyboard-config 2.6 and more)
+      xkeyboard-config 2.6 и другое)
     <li>Gcc 4.2.1 (+patches) and 2.95.3 (+ patches)
     <li>Perl 5.12.2 (+ patches)
-    <li>Our improved and secured version of Apache 1.3, with
-      SSL/TLS and DSO support
+    <li>Наша улучшенная и более безопасная версия Apache 1.3, с
+      SSL/TLS и поддержкой DSO
     <li>Nginx 1.2.2 (+ patches)
     <li>OpenSSL 1.0.0f (+ patches)
     <li>SQLite 3.7.13 (+ patches)
-    <li>Sendmail 8.14.5, with libmilter
+    <li>Sendmail 8.14.5, с libmilter
     <li>Bind 9.4.2-P2 (+ patches)
     <li>NSD 3.2.11
-    <li>Lynx 2.8.7rel.2 with HTTPS and IPv6 support (+ patches)
+    <li>Lynx 2.8.7rel.2 с HTTPS и поддержкой IPv6 (+ patches)
     <li>Sudo 1.7.2p8
     <li>Ncurses 5.7
     <li>Heimdal 0.7.2 (+ patches)
@@ -400,7 +399,7 @@ the package build process:
     <li>Binutils 2.15 (+ patches)
     <li>Gdb 6.3 (+ patches)
     <li>Less 444 (+ patches)
-    <li>Awk Aug 10, 2011 version
+    <li>Awk версия от 10 августа 2011 г.
     </ul>
 
 </ul>
@@ -408,8 +407,13 @@ the package build process:
 <a name="install"></a>
 <hr>
 <p>
-<h3><font color="#0000e0">How to install</font></h3>
+<h3><font color="#0000e0">Установка</font></h3>
 <p>
+Далее приведены инструкции, которые будут у вас в бумажном варианте, если вы приобрели установочные диски вместо использования альтернативных способов установки.
+Инструкции по использованию FTP или других способов для установки очень похожи; инструкции, прилагаемые к установочным дискам остаются актуальными,
+что 
+  
+
 Following this are the instructions which you would have on a piece of
 paper if you had purchased a CDROM set instead of doing an alternate
 form of install.  The instructions for doing an FTP (or other style
@@ -419,8 +423,7 @@ purchased a CDROM instead.
 <p>
 
 <hr>
-Please refer to the following files on the three CDROMs or FTP mirror for
-extensive details on how to install OpenBSD 5.2 on your machine:
+Для получения более детальной информации об установке OpenBSD 5.2 на вашу машину, обратитесь пожалуйста к следующим файлам, расположенным на CDROM или FTP:
 <p>
 <ul>
 <li>CD1:5.2/i386/INSTALL.i386
