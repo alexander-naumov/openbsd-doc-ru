@@ -191,49 +191,46 @@ rthreads уровня ядра, что позволяет многопоточн
     </ul>
 <p>
 
-<li>Assorted improvements:
+<li>Различные улучшения:
     <ul>
-    <li>Added <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=nginx&amp;sektion=8">nginx(8)</a>,
-         an HTTP server, reverse proxy server and mail proxy server.
-    <li>Added SQLite 3.7.13, a self-contained SQL database engine.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pcap&amp;sektion=3">libpcap</a>
-         has been updated with several core functions from tcpdump.org's libpcap-1.2.0 API, without
-         the clutter.
-    <li>Disabled SSLv2 in OpenSSL.
-    <li>Moved <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=libtool&amp;sektion=1">libtool(1)</a> into the base system. Much work remains to be done.
-    <li>Removed <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lint&amp;sektion=1&amp;manpath=OpenBSD+5.1">lint(1)</a>.
-    <li>Removed the <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=raid&amp;sektion=4&amp;manpath=OpenBSD+5.1">raid(4)</a>
-	RAIDframe driver and its corresponding
-	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=raidctl&amp;sektion=8&amp;manpath=OpenBSD+5.1">raidctl(8)</a> utility.
-	RAIDframe has been superseded by <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=softraid&amp;sektion=4">softraid(4)</a>. 
-    <li>Added <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=posix_spawn&amp;sektion=3">posix_spawn(3)</a>.
-    <li>Added <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mbsnrtowcs&amp;sektion=3">mbsnrtowcs(3)</a>
-	and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wcsnrtombs&amp;sektion=3">wcsnrtombs(3)</a>.
-    <li>Added <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getdelim&amp;sektion=3">getdelim(3)</a>
-	and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getline&amp;sektion=3">getline(3)</a>.
-    <li>More configuration variables for <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysconf&amp;sektion=3">sysconf(3)</a> and
+    <li>Добавлен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=nginx&amp;sektion=8">nginx(8)</a>,
+        как HTTP сервер, обратный прокси сервер и почтовый прокси сервер.
+    <li>Добавлен SQLite 3.7.13, самостоятельный приложение баз данных SQL.
+    <li>Был обновлен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pcap&amp;sektion=3">libpcap</a> с различными основными функциями из libpcap-1.2.0 API (tcpdump.org).
+    <li>Отключен SSLv2 в OpenSSL.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=libtool&amp;sektion=1">libtool(1)</a> перемещены в базовую систему. Многое еще предстоит сделать.
+    <li>Удален <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lint&amp;sektion=1&amp;manpath=OpenBSD+5.1">lint(1)</a>.
+    <li>Удален <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=raid&amp;sektion=4&amp;manpath=OpenBSD+5.1">raid(4)</a>
+	драйвер RAIDframe и связанные с ним утилиты
+	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=raidctl&amp;sektion=8&amp;manpath=OpenBSD+5.1">raidctl(8)</a>.
+	RAIDframe заменен на <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=softraid&amp;sektion=4">softraid(4)</a>. 
+    <li>Добавлен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=posix_spawn&amp;sektion=3">posix_spawn(3)</a>.
+    <li>Добавлен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mbsnrtowcs&amp;sektion=3">mbsnrtowcs(3)</a>
+	и <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wcsnrtombs&amp;sektion=3">wcsnrtombs(3)</a>.
+    <li>Добавлен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getdelim&amp;sektion=3">getdelim(3)</a>
+	и <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getline&amp;sektion=3">getline(3)</a>.
+    <li>Увеличено количество переменных конфигурации <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysconf&amp;sektion=3">sysconf(3)</a> и
 	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pathconf&amp;sektion=2">pathconf(2)</a>.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dirfd&amp;sektion=3">dirfd(3)</a>
-	is now a function instead of a macro.
+	теперь функция вместо макроса.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=posix_memalign&amp;sektion=3">posix_memalign(3)</a>
-	supports arbitrarily large alignments.
-    <li>Improved <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=realloc&amp;sektion=3">realloc(3)</a> performance.
+	поддерживает какие угодно большие выравнивания.
+    <li>Улучшена производительность <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=realloc&amp;sektion=3">realloc(3)</a>.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ld.so&amp;sektion=1">ld.so(1)</a>
-	recognizes the DF_1_NOOPEN flag and refuses to
+	распознает флаг DF_1_NOOPEN и отказывает
 	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dlopen&amp;sektion=3">dlopen(3)</a>
-	shared objects linked with "-z nodlopen".
-    <li>Improved compliance and/or cleanliness of header files, particularly
+	выделять объекты связанные "-z nodlopen".
+    <li>Повышен уровень соответствия и/или чистоты заголовочных файлов, в частности,
 	&lt;dirent.h&gt;, &lt;time.h&gt;, &lt;sys/time.h&gt;, &lt;limits.h&gt;,
-	&lt;arpa/inet.h&gt;, &lt;netinet/in.h&gt;, and &lt;sys/param.h&gt;.
-    <li>Improved kernel uvm memory allocator.
-    <li>Added support for using AMT to provide console-over-Ethernet (c.f. the
-	<a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/comms/amtterm/">amtterm</a> package).
-    <li>Improved support for amd64 systems with many memory extents.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=compat_linux&amp;sektion=8">compat_linux(8)</a>
-	improvements: TLS-vs-clone and futex fixes, added support
-	for statfs64(), tgkill(), gettid(), SOCK_CLOEXEC, and SOCK_NONBLOCK.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kdump&amp;sektion=1">kdump(1)</a>
-	improvements, including the ability to show thread IDs and dumping of timespec, timeval, sigaction, rlimit, sigset, clockid, and fdset arguments and results.
+	&lt;arpa/inet.h&gt;, &lt;netinet/in.h&gt;, и &lt;sys/param.h&gt;.
+    <li>Улечшено распределение памяти uvm ядра.
+    <li>Добавлена поддержка использования AMT для обеспечения console-over-Ethernet (см. пакет <a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/comms/amtterm/">amtterm</a>).
+    <li>Улучшена поддержка amd64-систем с многими уровнями памяти.
+    <li>Улучшения <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=compat_linux&amp;sektion=8">compat_linux(8)</a>: 
+	исправлены TLS-vs-clone и futex, добавлена поддержка
+	statfs64(), tgkill(), gettid(), SOCK_CLOEXEC, и SOCK_NONBLOCK.
+    <li>Улучшен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kdump&amp;sektion=1">kdump(1)</a>
+	включая поках ID потоков и  including the ability to show thread IDs and dumping of timespec, timeval, sigaction, rlimit, sigset, clockid, and fdset arguments and results.
     <li>Various improvements in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=smtpd&amp;sektion=8">smtpd(8)</a>:
 	reliability fixes, new MTA client, new scheduler and improved queue logic, simplified
 	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=smtpd.conf&amp;sektion=5">smtpd.conf(5)</a>
@@ -410,16 +407,7 @@ the package build process:
 <h3><font color="#0000e0">Установка</font></h3>
 <p>
 Далее приведены инструкции, которые будут у вас в бумажном варианте, если вы приобрели установочные диски вместо использования альтернативных способов установки.
-Инструкции по использованию FTP или других способов для установки очень похожи; инструкции, прилагаемые к установочным дискам остаются актуальными,
-что 
-  
-
-Following this are the instructions which you would have on a piece of
-paper if you had purchased a CDROM set instead of doing an alternate
-form of install.  The instructions for doing an FTP (or other style
-of) install are very similar; the CDROM instructions are left intact
-so that you can see how much easier it would have been if you had
-purchased a CDROM instead.
+Инструкции по использованию FTP или других способов для установки очень похожи; инструкции, для установки с CDROM остаются актуальными, так что, было бы гораздо проще, если бы вы вместо этого  приобрели установочные диски.
 <p>
 
 <hr>
@@ -451,39 +439,31 @@ purchased a CDROM instead.
 <hr>
 
 <p>
-Quick installer information for people familiar with OpenBSD, and the
-use of the "disklabel -E" command.  If you are at all confused when
-installing OpenBSD, read the relevant INSTALL.* file as listed above!
+Краткая информация по установке для людей знакомых с OpenBSD и использованию комманды 
+"disklabel -E". Если у вас все же возникли затруднения при установке OpenBSD, прочитайте соответствующий файл INSTALL.*, упомянутый выше!
 <p>
 
 <h3><font color="#e00000">OpenBSD/i386:</font></h3>
 <ul>
-Play with your BIOS options to enable booting from a CD. The OpenBSD/i386
-release is on CD1. If your BIOS does not support booting from CD, you will need
-to create a boot floppy to install from. To create a boot floppy write
-<i>CD1:5.2/i386/floppy52.fs</i> to a floppy and boot via the floppy drive.
+Настройте закгрузку с CD в DIOS. Выпуск OpenBSD/i386 находится на CD1. Если ваш BIOS не поддерживает загрузку с CD, необходимо будет создать загрузочную дискету для установки с нее. Для создания загрузочной дискеты запишите на нее <i>CD1:5.2/i386/floppy52.fs</i> и загрузитесь.
 
 <p>
-Use <i>CD1:5.2/i386/floppyB52.fs</i> instead for greater SCSI controller
-support, or <i>CD1:5.2/i386/floppyC52.fs</i> for better laptop support.
+Используйте <i>CD1:5.2/i386/floppyB52.fs</i> для лучшей поддержки контроллера SCSI или
+ <i>CD1:5.2/i386/floppyC52.fs</i> для лучшей поддержки ноутбуков.
 
 <p>
-If you can't boot from a CD or a floppy disk,
-you can install across the network using PXE as described in
-the included INSTALL.i386 document.
+Если вы не можете загрузиться с CD или дискеты, можно осуществить установку по сети с помощью PXE, 
+как описано в прилагающемся документе INSTALL.i386.
 
 <p>
-If you are planning on dual booting OpenBSD with another OS, you will need to
-read INSTALL.i386.
+Если вы планируете использовать двойную загрузку OpenBSD и другой ОС, обратитесь к INSTALL.i386.
 
 <p>
-To make a boot floppy under MS-DOS, use the &quot;rawrite&quot; utility located
-at <i>CD1:5.2/tools/rawrite.exe</i>. To make the boot floppy under a Unix OS,
-use the
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=1">dd(1)</a>
-utility. The following is an example usage of
+Для создания загрузочной дискеты в MS-DOS используйте программу &quot;rawrite&quot;, которая 
+находится на <i>CD1:5.2/tools/rawrite.exe</i>.  
+Для создания  загрузочной дискеты в ОС UNIX, используйте <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=1">dd(1)</a>. Ниже приведен пример использования
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=1">dd(1)</a>,
-where the device could be &quot;floppy&quot;, &quot;rfd0c&quot;, or
+где устройством (device) может быть &quot;floppy&quot;, &quot;rfd0c&quot;, или
 &quot;rfd0a&quot;.
 
 <ul><pre>
@@ -491,77 +471,64 @@ where the device could be &quot;floppy&quot;, &quot;rfd0c&quot;, or
 </pre></ul>
 
 <p>
-Make sure you use properly formatted perfect floppies with NO BAD BLOCKS or
-your install will most likely fail. For more information on creating a boot
-floppy and installing OpenBSD/i386 please refer to
-<a href="faq/faq4.html#MkFlop">FAQ 4.3.2</a>.
+Убедитесь, что вы используете правильно отформатированные дискеты без поврежденных секторов
+иначе установка может закончится неудачей.Дополнительную информацию по созданию загрузочных дискет и установке OpenBSD/i386 можно получить в <a href="faq/faq4.html#MkFlop">FAQ 4.3.2</a>.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/amd64:</font></h3>
 <ul>
-The 5.2 release of OpenBSD/amd64 is located on CD2.
-Boot from the CD to begin the install - you may need to adjust
-your BIOS options first.
-If you can't boot from the CD, you can create a boot floppy to install from.
-To do this, write <i>CD2:5.2/amd64/floppy52.fs</i> to a floppy, then
-boot from the floppy drive.
+Выпуск 5.2 OpenBSD/amd64 расположен на CD2. Загрузка с CD запускает процесс установки - однако, вначале необходимо убедиться в правильности настроек BIOS. Если загрузиться с CD  не получается, можно создать для установки загрузочную дискету. Для этого запишите на нее <i>CD2:5.2/amd64/floppy52.fs</i>, после чего можно загружаться.
 
 <p>
-If you can't boot from a CD or a floppy disk,
-you can install across the network using PXE as described in the included
-INSTALL.amd64 document.
+Если загрузиться с CD или дискеты не удается, можно установить OpenBSD через сеть используя PXE как описано в прилагаемом документе INSTALL.amd64.
 
 <p>
-If you are planning to dual boot OpenBSD with another OS, you will need to
-read INSTALL.amd64.
+Если планируется использовать двойную загрузку OpenBSD с другой ОС, ознакомьтесь с INSTALL.amd64.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/macppc:</font></h3>
 <ul>
-Burn the image from the FTP site to a CDROM, and poweron your machine
-while holding down the <i>C</i> key until the display turns on and
-shows <i>OpenBSD/macppc boot</i>.
+Запишите полученный с FTP-сервера образ на CDROM, включите машину, удерживая нажатой клавишу <i>C</i>
+пока дисплей  включается и отображается <i>OpenBSD/macppc boot</i>.
 
 <p>
-Alternatively, at the Open Firmware prompt, enter <i>boot cd:,ofwboot
+Как вариант, в строке Open Firmware введите <i>boot cd:,ofwboot
 /5.2/macppc/bsd.rd</i>
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/sparc64:</font></h3>
 <ul>
-Put CD3 in your CDROM drive and type <i>boot cdrom</i>.
+Вставьте CD3 в привод CDROM и введите <i>boot cdrom</i>. 
 
 <p>
-If this doesn't work, or if you don't have a CDROM drive, you can write
-<i>CD3:5.2/sparc64/floppy52.fs</i> or <i>CD3:5.2/sparc64/floppyB52.fs</i>
-(depending on your machine) to a floppy and boot it with <i>boot
-floppy</i>. Refer to INSTALL.sparc64 for details.
+Если это не сработает или если в машине отсутствет привод CDROM, можно записать (в зависимости от вашей машины) <i>CD3:5.2/sparc64/floppy52.fs</i> или <i>CD3:5.2/sparc64/floppyB52.fs</i> на дискету
+и загрузиться с нее (<i>boot floppy</i>). Подробности в INSTALL.sparc64.
 
 <p>
-Make sure you use a properly formatted floppy with NO BAD BLOCKS or your install
-will most likely fail.
+Убедитесь, что вы используете правильно отформатированные дискеты без поврежденных секторов
+иначе установка может закончится неудачей.
 
 <p>
-You can also write <i>CD3:5.2/sparc64/miniroot52.fs</i> to the swap partition on
-the disk and boot with <i>boot disk:b</i>.
+Также, можно записать <i>CD3:5.2/sparc64/miniroot52.fs</i> в раздел swap на диске и загрузиться с 
+<i>boot disk:b</i>.
 
 <p>
-If nothing works, you can boot over the network as described in INSTALL.sparc64.
+Если ничего из вышеперечисленного не сработает, можно загрузиться по сети как описано в INSTALL.sparc64.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/alpha:</font></h3>
 <ul>
-<p>Write <i>FTP:5.2/alpha/floppy52.fs</i> or
-<i>FTP:5.2/alpha/floppyB52.fs</i> (depending on your machine) to a diskette and
-enter <i>boot dva0</i>. Refer to INSTALL.alpha for more details.
+<p>Запишите <i>FTP:5.2/alpha/floppy52.fs</i> или
+<i>FTP:5.2/alpha/floppyB52.fs</i> (в зависимости от вашей машины) на дискету и введите
+<i>boot dva0</i>. Ознакомьтесь с INSTALL.alpha для получения дополнительной информации.
 
 <p>
-Make sure you use a properly formatted floppy with NO BAD BLOCKS or your install
-will most likely fail.
+Убедитесь, что вы используете правильно отформатированные дискеты без поврежденных секторов
+иначе установка может закончится неудачей.
 
 </ul>
 
@@ -569,45 +536,41 @@ will most likely fail.
 <h3><font color="#e00000">OpenBSD/armish:</font></h3>
 <ul>
 <p>
-After connecting a serial port, Thecus can boot directly from the network
-either tftp or http. Configure the network using fconfig, reset,
-then load bsd.rd, see INSTALL.armish for specific details.
-IOData HDL-G can only boot from an EXT-2 partition. Boot into linux
-and copy 'boot' and bsd.rd into the first partition on wd0 (hda1)
-then load and run bsd.rd, preserving the wd0i (hda1) ext2fs partition.
-More details are available in INSTALL.armish.
+После подключения через последовательный порт Thecus можно загрузить прямо из сети через tftp или http. 
+Сконфигурируйте при помощи ifconfig сетевые интерфейсы, преподключитесь, затем загрузите bsd.rc. Дополнительную информацию можно получить в INSTALL.armish.
+IOData HDL-G может загрузиться только из раздела EXT-2. Загрузитесь в Linux и скопируйте 'boot' и bsd.rd
+ в первый раздел wd0 (hda1), затем загрузитесь и запустите bsd.rd сохранив раздел wd0i (hda1) ext2fs.
+Дополнительная информация находится в INSTALL.armish.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/hp300:</font></h3>
 <ul>
 <p>
-Boot over the network by following the instructions in INSTALL.hp300.
+Загрузитесь из сети, следуя инструкциям, содержащимся в файле INSTALL.hp300.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/hppa:</font></h3>
 <ul>
 <p>
-Boot over the network by following the instructions in INSTALL.hppa or the
-<a href="hppa.html#install">hppa platform page</a>.
+Загрузитесь из сети, следуя инструкциям, содержащимся в файле INSTALL.hppa или на
+<a href="hppa.html#install">странице hppa архитектуры</a>.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/landisk:</font></h3>
 <ul>
 <p>
-Write <i>miniroot52.fs</i> to the start of the CF
-or disk, and boot normally.
+Запишите <i>miniroot52.fs</i> в начало CF или на диск и загрузитесь в обычном режиме.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/loongson:</font></h3>
 <ul>
 <p>
-Write <i>miniroot52.fs</i> to a USB stick and boot bsd.rd from it
-or boot bsd.rd via tftp.
-Refer to the instructions in INSTALL.loongson for more details.
+Запишите <i>miniroot52.fs</i> на USB и загрузите с нее bsd.rd или загрузите bsd.rd через tftp.
+Для получения дополнительной информации обратитесь к INSTALL.loongson.
 </ul>
 <p>
 
@@ -615,110 +578,99 @@ Refer to the instructions in INSTALL.loongson for more details.
 <h3><font color="#e00000">OpenBSD/luna88k:</font></h3>
 <ul>
 <p>
-Copy bsd.rd to a Mach or UniOS partition, and boot it from the PROM.
-Alternatively, you can create a bootable tape and boot from it. Refer to
-the instructions in INSTALL.luna88k for more details.
+Скопируйте bsd.rd на Mach или UniOS раздел и загрузите его из PROM.
+Также, можно сделать загрузосную ленту и загрузиться с нее.
+Для получения дополнительной информации обратитесь к INSTALL.luna88k.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/mvme68k:</font></h3>
 <ul>
 <p>
-You can create a bootable installation tape or boot over the network.<br>
-The network boot requires a MVME68K BUG version that supports the <i>NIOT</i>
-and <i>NBO</i> debugger commands. Follow the instructions in INSTALL.mvme68k
-for more details.
+Вы можете создать загрузочную ленту или загрузиться из сети.<br>
+Загрузки из сети требует версию MVME68K BUG, поддерживающую отладочные комманды <i>NIOT</i>
+и <i>NBO</i>. Для получения дополнительной информации обратитесь к INSTALL.mvme68k.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/mvme88k:</font></h3>
 <ul>
 <p>
-You can create a bootable installation tape or boot over the network.<br>
-The network boot requires a MVME88K BUG version that supports the <i>NIOT</i>
-and <i>NBO</i> debugger commands. Follow the instructions in INSTALL.mvme88k
-for more details.
+Вы можете создать загрузочную ленту или загрузиться из сети.<br>
+Загрузки из сети требует версию MVME68K BUG, поддерживающую отладочные комманды <i>NIOT</i>
+и <i>NBO</i>. Для получения дополнительной информации обратитесь к INSTALL.mvme88k.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/sgi:</font></h3>
 <ul>
 <p>
-To install on an O2, burn cd52.iso on a CD-R, put it in the CD drive of your
-machine and select <i>Install System Software</i> from the System Maintenance
-menu.
+Для установки на O2 запишите cd52.iso на CD-R, вставьте его в привод CDROM и выберите в меню Обслуживания Системы <i>Install System Software</i>.
 
 <p>
-On other systems, or if your machine doesn't have a CD drive, you can
-setup a DHCP/tftp network server, and boot using "bootp()/bsd.rd.IP##" using
-the kernel matching your system type.
-Refer to the instructions in INSTALL.sgi for more details.
+На других системах или, если у вашей машины отсутствует привод CDROM, можно установить DHCP/tftp
+сервер и загрузиться используя "bootp()/bsd.rd.IP##" и ядро, соответствующее типу вашей системы.
+Для получения дополнительной информации обратитесь к INSTALL.sgi.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/socppc:</font></h3>
 <ul>
 <p>
-After connecting a serial port, boot over the network via DHCP/tftp.
-Refer to the instructions in INSTALL.socppc for more details.
+После подключения к последовательному порту, загрузитесь из сети при помощи DHCP/tftp.
+Для получения дополнительной информации обратитесь к INSTALL.socppc.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/sparc:</font></h3>
 <ul>
-Boot from one of the provided install ISO images, using one of the two
-commands listed below, depending on the version of your ROM.
+Загрузитесь с одного из предлагаемых загрузочных образов ISO, используя одну из двух приведенных ниже комманд (в зависимости от версии ROM):
 
 <ul><pre>
 ok <strong>boot cdrom 5.2/sparc/bsd.rd</strong>
-or
+или
 &gt; <strong>b sd(0,6,0)5.2/sparc/bsd.rd</strong>
 </pre></ul>
 
 <p>
-If your SPARC system does not have a CD drive, you can alternatively boot from floppy.
-To do so you need to write <i>floppy52.fs</i> to a floppy.
-For more information see <a href="faq/faq4.html#MkFlop">FAQ 4.3.2</a>.
-To boot from the floppy use one of the two commands listed below,
-depending on the version of your ROM.
+Если ваша SPARC система не оснащена приводом CDROM, можно загрузиться с дискеты.
+Для этого необходимо на дискету записать <i>floppy52.fs</i>. 
+Для получения дополнительной информации обратитесь к <a href="faq/faq4.html#MkFlop">FAQ 4.3.2</a>.
+Для загрузки с дискеты используйте одну из двух приведенных ниже комманд в зависимости от версии ROM.
 
 <ul><pre>
 ok <strong>boot floppy</strong>
-or
+или
 &gt; <strong>b fd()</strong>
 </pre></ul>
 
 <p>
-Make sure you use a properly formatted floppy with NO BAD BLOCKS or your install
-will most likely fail.
+Убедитесь, что вы используете правильно отформатированные дискеты без поврежденных секторов
+иначе установка может закончится неудачей.
 
 <p>
-If your SPARC system doesn't have a floppy drive nor a CD drive, you can either
-setup a bootable tape, or install via network, as told in the
-INSTALL.sparc file.
+Если ваша SPARC система не оснащена дисководом флоппи-дисков или CD, можно также использовать 
+загрузочную ленту или установку через сеть как описано в файле INSTALL.sparc.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/vax:</font></h3>
 <ul>
-Boot over the network via mopbooting as described in INSTALL.vax.
+Загрузитесь из сети используя mopbooting как описано в INSTALL.vax.
 </ul>
 
 <p>
 <h3><font color="#e00000">OpenBSD/zaurus:</font></h3>
 <ul>
 <p>
-Using the Linux built-in graphical ipkg installer, install the
-openbsd52_arm.ipk package.  Reboot, then run it.  Read INSTALL.zaurus
-for a few important details.
+Используя встроенный в Linux графический инсталлятор ipkg, установите пакет openbsd52_arm.ipk.
+Перегрузитсь и запустите его. Прочитайте INSTALL.zaurus для получения важных подробностей. 
 </ul>
 
 <p>
-<h3><font color="#e00000">Notes about the source code:</font></h3>
+<h3><font color="#e00000">Примечания, касающиеся исходного кода:</font></h3>
 <ul>
-src.tar.gz contains a source archive starting at /usr/src.  This file
-contains everything you need except for the kernel sources, which are
-in a separate archive.  To extract:
+В архиве src.tar.gz содержатся исходные тексты начиная с /usr/src. Этот файл включает в себя все, что вам может понадобится за исключением исходников ядра, которые расположены в отдельном архиве. Для его распаковки выполните:
 <p>
 <ul><pre>
 # <strong>mkdir -p /usr/src</strong>
@@ -726,9 +678,8 @@ in a separate archive.  To extract:
 # <strong>tar xvfz /tmp/src.tar.gz</strong>
 </pre></ul>
 <p>
-sys.tar.gz contains a source archive starting at /usr/src/sys.
-This file contains all the kernel sources you need to rebuild kernels.
-To extract:
+Архив sys.tar.gz включает в себя исходники начиная с /usr/src/sys.
+Эти файлы содержат все, что необходимо для пересборки ядра. Для его распаковки выполните:
 <p>
 <ul><pre>
 # <strong>mkdir -p /usr/src/sys</strong>
@@ -736,30 +687,24 @@ To extract:
 # <strong>tar xvfz /tmp/sys.tar.gz</strong>
 </pre></ul>
 <p>
-Both of these trees are a regular CVS checkout.  Using these trees it
-is possible to get a head-start on using the anoncvs servers as
-described <a href="anoncvs.html">here</a>.
-Using these files
-results in a much faster initial CVS update than you could expect from
-a fresh checkout of the full OpenBSD source tree.
+Оба эти дерева исходных текстов регулярно проверяются CVS. Используя их за основу, можно пользоваться анонимными CVS серверами как описано <a href="anoncvs.html">здесь</a>.
+В результате использования этих файлов, обновление через CVS проходит значительно быстрее в сравнении с полной загрузкой полного дерева исходных текстов OpenBSD.
 <p>
 </ul>
 
 <a name="upgrade"></a>
 <hr>
 <p>
-<h3><font color="#0000e0">How to upgrade</font></h3>
+<h3><font color="#0000e0">Как обновиться до версии 5.2</font></h3>
 <p>
-If you already have an OpenBSD 5.1 system, and do not want to reinstall,
-upgrade instructions and advice can be found in the
-<a href="faq/upgrade52.html">Upgrade Guide</a>.
+Если у вас уже есть установленная OpenBSD 5.1 и нет желания ее переустанавливать, ознакомьтесь с <a href="faq/upgrade52.html">Руководством по обновлению</a>.
 
 <a name="ports"></a>
 <hr>
 <p>
-<h3><font color="#0000e0">Ports Tree</font></h3>
+<h3><font color="#0000e0">Дерево портов</font></h3>
 <p>
-A ports tree archive is also provided.  To extract:
+Дерево портов также присутствует. Для распаковки:
 <p>
 <ul><pre>
 # <strong>cd /usr</strong>
@@ -767,36 +712,21 @@ A ports tree archive is also provided.  To extract:
 # <strong>cd ports</strong>
 </pre></ul>
 <p>
-The <i>ports/</i> subdirectory is a checkout of the OpenBSD ports tree.  Go
-read the <a href="faq/ports/index.html">ports</a> page
-if you know nothing about ports
-at this point.  This text is not a manual of how to use ports.
-Rather, it is a set of notes meant to kickstart the user on the
-OpenBSD ports system.
+Подкаталог <i>ports/</i> содержит дерево портов OpenBSD. Если вы ничего не знаете о то, что такое система портов, рекомендуется ознакомиться с документом <a href="faq/ports/index.html">порты</a>.
+Этот документ не является руководством по использованию портов. Скорее, это набор заметок для быстрого старта пользователя в системе портов OpenBSD.
 <p>
-The <i>ports/</i> directory represents a CVS (see the manpage for
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;apropos=0&amp;sektion=1&amp;manpath=OpenBSD+Current&amp;arch=i386">
-cvs(1)</a> if
-you aren't familiar with CVS) checkout of our ports.  As with our complete
-source tree, our ports tree is available via anoncvs.  So, in
-order to keep current with it, you must make the <i>ports/</i> tree
-available on a read-write medium and update the tree with a command
-like:
+Каталог <i>ports/</i> представляет собой CVS (если вы не знакомы с CVS, обратитесь к странице руководства <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;apropos=0&amp;sektion=1&amp;manpath=OpenBSD+Current&amp;arch=i386">cvs(1)</a>) извлечение наших портов. Как и полное дерево исходных текстов, дерево портов доступно через анонимные CVS. 
+Таким образом, для актуализации портов необходимо каталог <i>ports/</i> сделать доступным для чтения и записи и обновить дерево портов следующим образом:
 <p>
 <ul><pre>
 # <strong>cd [portsdir]/; cvs -d anoncvs@server.openbsd.org:/cvs update -Pd -rOPENBSD_5_2</strong>
 </pre></ul>
 <p>
-[Of course, you must replace the local directory and server name here
-with the location of your ports collection and a nearby anoncvs
-server.]
+[Конечно, здесь можно изменить локальный каталог и имя сервера на те, что вам необходимы.]
 <p>
-Note that most ports are available as packages through FTP. Updated
-packages for the 5.2 release will be made available if problems arise.
+Обратите внимание на то, что большинство портов доступно на FTP в виде пакетов. При возникновении проблем, вам всегда доступны обновленные пакеты для выпуска 5.2. 
 <p>
-If you're interested in seeing a port added, would like to help out, or just
-would like to know more, the mailing list
-<a href="mail.html">ports@openbsd.org</a> is a good place to know.
+Если вы хотите, что бы был добавлен какой-либо порт, хотели бы помочь или просто хотите узнать больше, для этого существует рассылка <a href="mail.html">ports@openbsd.org</a>. 
 <p>
 
 <hr>
