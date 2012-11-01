@@ -32,7 +32,7 @@ Copyright 1997-2012, Theo de Raadt.<br>
 
 <a href="#new">Что нового</a><br>
 <a href="#install">Установка</a><br>
-<a href="#upgrade">Обновление</a><br>
+<a href="#upgrade">Как обновиться до версии 5.2</a><br>
 <a href="#ports">Использование дерева портов</a><br>
 <a href="orders.html">Заказ установочных CD</a><br>
 
@@ -230,31 +230,22 @@ rthreads уровня ядра, что позволяет многопоточн
 	исправлены TLS-vs-clone и futex, добавлена поддержка
 	statfs64(), tgkill(), gettid(), SOCK_CLOEXEC, и SOCK_NONBLOCK.
     <li>Улучшен <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kdump&amp;sektion=1">kdump(1)</a>
-	включая поках ID потоков и  including the ability to show thread IDs and dumping of timespec, timeval, sigaction, rlimit, sigset, clockid, and fdset arguments and results.
-    <li>Various improvements in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=smtpd&amp;sektion=8">smtpd(8)</a>:
-	reliability fixes, new MTA client, new scheduler and improved queue logic, simplified
-	<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=smtpd.conf&amp;sektion=5">smtpd.conf(5)</a>
-	syntax, better RFC compliance and several cosmetic changes.
-    <li>The <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mg&amp;sektion=1">mg(1)</a>
-	emacs-like editor now supports cscope functionality.
-	Also, backup files can now be saved to a user's home directory in addition to the current working directory.
-    <li>Fixed operation of <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kvm_getfiles&amp;sektion=3">kvm_getfile2()</a> (and therefore <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fstat&amp;sektion=1">fstat(1)</a> and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pstat&amp;sektion=8">pstat(8)</a>) on kernel crash dumps.
-    <li>Improved emacs-style key bindings and handling of large arrays in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh(1)</a>.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=halt&amp;sektion=8">halt(8)</a> disables "suspend-on-lid-close" so that you don't accidentally suspend instead of shutting down.
-    <li>Improvements to parallel <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&amp;sektion=1">make(1)</a>: added the .CHEAP and .EXPENSIVE special targets and fixed glitches in already-rebuilt logic.
-    <li>The <a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/devel/libusb1/">libusb</a> package is able to access non-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ugen&amp;sektion=4">ugen(4)</a> devices for some operations, allowing e.g. <a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/sysutils/ykpers/">programming YubiKeys</a> with a standard kernel.
-    <li>Various improvements in <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1">tmux(1)</a>:
-	a new unified tree view to select sessions or windows,
-	new move-pane and renumber-windows commands,
-	a history of pane layouts,
-	simple output rate limiting, and
-	custom formats (-F) have been extended and are now accepted by more commands.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fsck_msdos&amp;sektion=8">fsck_msdos(8)</a> now works on devices with non-512 byte sectors.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=quotacheck&amp;sektion=8">quotacheck(8)</a> now works with DUID based <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fstab&amp;sektion=5">fstab(5)</a> files.
-    <li>Numerous minor improvement to <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fdisk&amp;sektion=8">fdisk(8)</a>, including more sanity checking and better default partition sizing on large disks.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a> now discards trailing NULs in option data, and in general parses option data with more paranoia.
-    <li>Various improvements to <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a> startup and timeout handling.
-    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=disklabel&amp;sektion=8">disklabel(8)</a> does a better job of calculating physical memory during partition auto-allocation of devices with non-512 byte sectors.
+	включая показ ID потоков и дампинг timespec, timeval, sigaction, rlimit, sigset, clockid, и fdset агрументов и результатов.
+    <li>Различные улучшения <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=smtpd&amp;sektion=8">smtpd(8)</a>: надежность исправлений, новый MTA клиент, новый планировщик и улучшение логики очередей, упрощен синтаксис <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=smtpd.conf&amp;sektion=5">smtpd.conf(5)</a>, улучшено соответствие RFC и ряд косметических изменений.
+    <li>Emacs-подобный редактор <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mg&amp;sektion=1">mg(1)</a> теперь поддерживает функциональность cscope.
+	Также, резервные копии файлов могут сохраняться в домашний каталог пользователя дополнительно к сохранению их в рабочем каталоге.
+    <li>Исправлена работа <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kvm_getfiles&amp;sektion=3">kvm_getfile2()</a> (и, соответственно, <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fstat&amp;sektion=1">fstat(1)</a> и <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pstat&amp;sektion=8">pstat(8)</a>) в дампах ядра.
+    <li>Улучшен emacs-стиль клавиш и обработка больших массивов в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh(1)</a>.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=halt&amp;sektion=8">halt(8)</a> отключает "suspend-on-lid-close", так что, вы случано не приостановите вместо выключения.
+    <li>Улучшена параллельность <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&amp;sektion=1">make(1)</a>: добавлены специальные цели .CHEAP and .EXPENSIVE и исправлены глюки в логике already-rebuilt.
+    <li>Пакет <a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/devel/libusb1/">libusb</a> имеет для некоторых операций доступ к не-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ugen&amp;sektion=4">ugen(4)</a> устройствам, что позволяет, например, <a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/sysutils/ykpers/">программирование YubiKeys</a> со стандартным ядром.
+    <li>Различные улучшения в <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1">tmux(1)</a>: новое унифицированное представление дерева для выбора сессий или окон, новые команды перемещения панели и перенумерования окон, история макетов панели, упрощено ограничение скорость вывода и были расширены пользовательские форматы (-F) и в настоящее время принимается больше команд.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fsck_msdos&amp;sektion=8">fsck_msdos(8)</a> сейчас работает с устройствами, использующими секторы не 512 байт.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=quotacheck&amp;sektion=8">quotacheck(8)</a> сейчас работает с DUID <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fstab&amp;sektion=5">fstab(5)</a> файлами.
+    <li>Многочисленные незначительные улучшения <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fdisk&amp;sektion=8">fdisk(8)</a>, в том числе, более вменяемая проверка и улучшена разбивка по умолчанию больших дисков.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a> теперь отбрасывает тянущиеся NUL в вариантах данных и более пристально анализирует данные.
+    <li>Различные улучшения в обработке запуска и ожидания <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a>.
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=disklabel&amp;sektion=8">disklabel(8)</a> лучше выполняет определение физической памяти разделов при автораспределении на устройствах с не-512 битовыми секторами.
     <li>SCSI errors are now correctly propagated to userland, e.g. <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mount&amp;sektion=2">mount(2)</a> now reports specific errors such as trying to mount RW filesystems from RO media.
     <li>Improved FAT media handling: autorecognize such media even if the 0x55aa signature is missing and prevent the writing of an OpenBSD disklabel over the FAT data structures.
     <li>The MS-DOS FAT filesystem implementation gained a significant write speedup for large files (up to twice as fast).
@@ -263,7 +254,7 @@ rthreads уровня ядра, что позволяет многопоточн
 
 <li>OpenSSH 6.1:
     <ul>
-    <li>New features:
+    <li>Новые возможности:
       <ul>
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
           This release turns on pre-auth sandboxing sshd by default for new installs,
@@ -702,7 +693,7 @@ ok <strong>boot floppy</strong>
 <a name="ports"></a>
 <hr>
 <p>
-<h3><font color="#0000e0">Дерево портов</font></h3>
+<h3><font color="#0000e0">Использование дерева портов</font></h3>
 <p>
 Дерево портов также присутствует. Для распаковки:
 <p>
