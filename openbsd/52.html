@@ -246,9 +246,9 @@ rthreads уровня ядра, что позволяет многопоточн
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a> теперь отбрасывает тянущиеся NUL в вариантах данных и более пристально анализирует данные.
     <li>Различные улучшения в обработке запуска и ожидания <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a>.
     <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=disklabel&amp;sektion=8">disklabel(8)</a> лучше выполняет определение физической памяти разделов при автораспределении на устройствах с не-512 битовыми секторами.
-    <li>SCSI errors are now correctly propagated to userland, e.g. <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mount&amp;sektion=2">mount(2)</a> now reports specific errors such as trying to mount RW filesystems from RO media.
-    <li>Improved FAT media handling: autorecognize such media even if the 0x55aa signature is missing and prevent the writing of an OpenBSD disklabel over the FAT data structures.
-    <li>The MS-DOS FAT filesystem implementation gained a significant write speedup for large files (up to twice as fast).
+    <li>Ошибки SCSI теперь корректно передаются в пространство пользователя, например <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mount&amp;sektion=2">mount(2)</a> будет передавать специфические ошибки такие как попытка монтирования с правами чтения и записи файловой системы RO устройства.
+    <li>Улучшена обработка накопителей с FAT: работает автоопределение таких накопителей даже если отсутствует подпись 0x55aa и предотвращает запись OpenBSD disklabel на структуру данных FAT.
+    <li>В реализации файловой системы MS-DOS FAT значительно ускорена запись больших файлов (практически в два раза).
     </ul>
 <p>
 
@@ -257,49 +257,39 @@ rthreads уровня ядра, что позволяет многопоточн
     <li>Новые возможности:
       <ul>
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          This release turns on pre-auth sandboxing sshd by default for new installs,
-          by setting UsePrivilegeSeparation=sandbox in sshd_config.
+        Этот релиз, при указании UsePrivilegeSeparation=sandbox в sshd_config, для новых установок по умолчанию включает sshd в песочнице (sandbox).
+          <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;sektion=1">sshd-keygen(1)</a>:
+        Добавлены опции для определния начального номера строки и число линий для обработки при отборе модулей кандидатов, позволяя параллельную обработку различных частей файла модуля кандидата.          
+      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
+        Директива Match теперь поддерживает согласование на локальном (прослушиваемом) адресе и порту входящих соединениий, перенаправленных через LocalAddress и LocalPort.         
+      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
+          Расширена директива Match sshd_config, позволяя устанавливать AcceptEnv в {Allow,Deny}{Users,Groups}.
+      <li>Добавлена поддержка RFC6594 SSHFP DNS записей для типов ключей ECDSA. (bz#1978)
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;sektion=1">sshd-keygen(1)</a>:
-          Add options to specify starting line number and number of lines to process
-          when screening moduli candidates, allowing processing of different parts of
-          a candidate moduli file in parallel.
+          Позволяет преобразование RSA1 ключей в публичные PEM и PKCS8.
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          The Match directive now supports matching on the local (listen) address and
-          port upon which the incoming connection was received via LocalAddress and
-          LocalPort clauses.
+        Позволяет в sshd_config использование директивы PermitOpen для принятия "none" в качестве аргумента для отклонения всех запросов переадресации.          
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          Extend sshd_config Match directive to allow setting AcceptEnv and {Allow,Deny}{Users,Groups}.
-      <li>Add support for RFC6594 SSHFP DNS records for ECDSA key types. (bz#1978)
-      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;sektion=1">sshd-keygen(1)</a>:
-          Allow conversion of RSA1 keys to public PEM and PKCS8.
-      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          Allow the sshd_config PermitOpen directive to accept "none" as an argument to
-          refuse all port-forwarding requests.
-      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          Support "none" as an argument for AuthorizedPrincipalsFile.
+          Поддерживает "none" в качестве аргумента для AuthorizedPrincipalsFile.
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keyscan&amp;sektion=1">sshd-keyscan(1)</a>:
-          Look for ECDSA keys by default. (bz#1971)
+          По умолчанию ищет ECDSA ключи. (bz#1971)
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          Add "VersionAddendum" to sshd_config to allow server operators to append some
-          arbitrary text to the server SSH protocol banner.
+          В файл sshd_config добавлена "VersionAddendum", разрешающая операторам сервера добавлять произвольный текст в баннер протокола SSH сервера.
       </ul>
-    <li>The following significant bugs have been fixed in this release:
+    <li>В этом выпуске были исправлены следующие важные ошибки:
       <ul>
-      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a> and
+      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a> и
           <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;sektion=1">ssh(1)</a>:
-          Don't spin in accept() in situations of file descriptor exhaustion. Instead
-          back off for a while.
-      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a> and
+          Не крутится в accept() в ситуациях при истощении файловых дескрипторов вместо возвращения.
+      <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a> и
           <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;sektion=1">ssh(1)</a>:
-          Remove hmac-sha2-256-96 and hmac-sha2-512-96 MACs as they were removed from
-          the specification. (bz#2023)
+          Удален hmac-sha2-256-96 и hmac-sha2-512-96 MACs в связи с удалением из спецификации. (bz#2023)
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          Handle long comments in config files better. (bz#2025)
+          Описатели длинных коментариев в конфигурационных файлах стали лучше. (bz#2025)
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;sektion=1">ssh(1)</a>:
-          Delay setting tty_flag so RequestTTY options are correctly picked up. (bz#1995)
+          Установка задержки tty_flag опции RequestTTY работает корректно. (bz#1995)
       <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&amp;sektion=8">sshd(8)</a>:
-          Fix handling of /etc/nologin incorrectly being applied to root on platforms
-          that use login_cap.
+          Исправлена обработка /etc/nologin неправильно применяемая к корню на платформах, использующих login_cap.
       </ul>
     </ul>
 <p>
