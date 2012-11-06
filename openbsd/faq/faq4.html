@@ -208,110 +208,108 @@ Linux.  Для получения подробностей обратитесь 
 Опять же, не все платформы поддерживают все предлагаемые варианты.
 
 <ul>
-<li><b>CD-ROM:</b> Of course, we prefer you use the
-<a href="../orders.html">Official CD-ROM set</a>, but you can also use
-<tt>install52.iso</tt> or you can make your own.
+<li><b>CD-ROM:</b> Конечно, мы предлагаем вам использовать 
+<a href="../orders.html">Официальный набор установочных CD-ROM</a>, но вы, также,
+можете использовать <tt>install52.iso</tt> или собрать свой установочный набор.
 
 <li><b>FTP:</b>
-Either one of the OpenBSD
-<a href="../ftp.html">FTP mirror sites</a>
-or your own local FTP server holding the file sets.
+Любой из <a href="../ftp.html">FTP зеркал</a> или ваш локальный FTP сервер, 
+содержащий набор установочных файлов.
 
 <li><b>HTTP:</b>
-Either one of the OpenBSD
-<a href="../ftp.html#http">HTTP mirror sites</a>
-or your own local web server holding the file sets.
+Любой из <a href="../ftp.html#http">HTTP зеркал</a> или ваш локальный веб-сервер, 
+содержащий набор установочных файлов.
 
-<li><b>Local disk partition:</b>
-In many cases, you can install file sets from another partition
-on a local hard disk.
-For example, on <a href="../i386.html">i386</a>,
-you can install from a FAT partition or a CD-ROM formatted in
-ISO9660, Rock Ridge or Joliet format.
-In some cases, you will have to manually mount the file system before using it.
+<li><b>Раздел локального диска:</b>
+Во многих случаях, вы сможете установить наборы файлов из другого раздела 
+локального жесткого диска.
+Например, на платформе <a href="../i386.html">i386</a> вы сможете провести 
+установку из FAT раздела или с CD-ROM, отформатированного в ISO9660, 
+Rock Ridge или Joliet. 
+Скорее всего, вам придется вручную примонтировать файловую систему
+перед ее использованием.
 
 <li><b>NFS:</b>
-Some platforms support using NFS mounts for the file sets.
+Некоторые платформы поддерживают использование примонтированной NFS для 
+получения установочных файлов.
 
-<li><b>Tape:</b>
-File sets can also be read from a supported tape.
-Details on creating the tape are in the <tt>INSTALL.</tt><i>platform</i>
-document.
+<li><b>Лента:</b>
+Установочные наборы файлов могут быть также прочитаны с ленты.
+Узнать более подробно о созданиии такой ленты можно в документе
+<tt>INSTALL.</tt><i>платформа</i>.
 </ul>
 
 <a name="Checklist"></a>
-<h2>4.2 - Pre-installation checklist</h2>
+<h2>4.2 - Предварительная подготовка</h2>
 
 <p>
-Before you start your install, you should have some idea what you
-want to end up with.
-
+Перед началом установки, вам необходимо иметь некоторое представление о том, 
+что выхотите получить в итоге.
+По крайней мере, вам понадобится следующая информация:
 You will want to know the following items, at least:
 <ul>
-<li>Machine name.
-<li>Hardware installed and available:
+<li>Имя машины.
+<li>Доступное и установленное оборудование:
   <ul>
-  <li>Verify compatibility with your platform's hardware
-      compatibility page.
-  <li>If ISA, you also need to know hardware settings, and confirm
-      they are as OpenBSD requires.
+  <li>Проверьте совместимость вашего оборудования на странице совместимости
+оборудования для вашей платформы.
+  <li>Если используется ISA, вам также будет необходимо знать аппаратные настройки
+и подтвердить их, если это понадобится OpenBSD.
   </ul>
-<li>Install method to be used (CD-ROM, FTP, etc.).
-<li>Should an important bug be found, how will the system be patched?
+<li>Используемый метод установки (CD-ROM, FTP, и т.д.).
+<li>Как исправить систему, если будет найдена важная ощибка?
   <ul>
-  <li>If done locally, you will need to have
-      <a href="#Partitioning">sufficient space</a> available for the
-      source tree and building it.
-  <li>Otherwise, you will need access to another machine to build
-      a patched
-      <a href="faq5.html#Release">release</a>
-      on.
+  <li>Если все организовано локально, вам понадобится 
+      <a href="#Partitioning">достаточное пространство</a> для размещения 
+дерева исходных текстов и сборки.
+  <li>В пртивном случае, вам понадобится доступ к другой машине для сборки
+исправленной <a href="faq5.html#Release">версии</a>.
   </ul>
-<li>Desired disk layout:
+<li>Желаемая структура разметки диска:
   <ul>
-  <li>Does existing data need to be saved elsewhere?
-  <li>Will OpenBSD coexist on this system with another OS?
-      If so, how will each system be booted?
-      Will you need to install a "boot manager"?
-  <li>Will the entire disk be used for OpenBSD, or do you want to
-      keep an existing partition/OS (or space for a future one)?
-  <li>How do you wish to sub-partition the OpenBSD part of your
-      disk?
+  <li>Есть ли на диске данные, которые необходимо сохранить в другом месте?
+  <li>Будет ли OpenBSD сосуществовать в вашей системе с другой ОС?
+      Если это так, то как будет загружаться каждая из систем?
+      Нужно ли будет устанавливать "менеджер загрузки"?
+  <li>Будет ли использоваться для OpenBSD весь диск или вам нужно сохранить 
+существующий раздел/ОС (или оставить свободное место для использования в будущем)? 
+  <li>Как вы хотите распределить раздел OpenBSD на вашем диске?
   </ul>
-<li>Network settings, if not using DHCP:
+<li>Сетевые настройки, если не используется DHCP:
   <ul>
-  <li>Domain name.
-  <li>Domain Name Server(s) (DNS) address.
-  <li>IP addresses and subnet masks for each NIC.
-  <li>Gateway address.
+  <li>Доменное имя.
+  <li>Адрес Сервера(ов) Доменных Имен(DNS).
+  <li>IP адреса м маски подсети для каждого NIC.
+  <li>Адрес шлюза.
   </ul>
-<li>Will you be running the X Window System?
+<li>Будете ли вы запускать X Window System?
 </ul>
 
 
 <a name="MkInsMedia"></a>
-<h2>4.3 - Creating bootable OpenBSD install media</h2>
+<h2>4.3 - Создание загрузочного диска для 
+          установки OpenBSD</h2>
 
 <p>
-As examples, we will look at the installation images available for the
+В качестве примера мы рассмотрим установочные образы, доступные для платформ
 <a href="../i386.html">i386</a>
-and <a href="../sparc.html">sparc</a> platforms.
-
+и <a href="../sparc.html">sparc</a>. 
 <p>
-The <a href="../i386.html">i386</a> platform has six separate
-installation disk images to choose from:
+Для платформы <a href="../i386.html">i386</a> существует шесть различных
+образов установочных дисков:
 
 <ul>
-<li><b><tt>cd52.iso</tt></b> is an ISO9660 image that can be used to
-  create a bootable CD with most popular CD-ROM creation software
-  on most platforms.
-  This image has the widest selection of drivers, and is usually
-  the recommended choice if your hardware can boot from a CDROM.
-<li><b><tt>cdemu52.iso</tt></b> is an ISO9660 image, using
-  "floppy emulation" booting, using a 2.88M floppy image.
-  It is hoped that few people will need this
-  image -- most people will use <tt>cd52.iso</tt>; only use
-  <tt>cdemu52.iso</tt> if <tt>cd52.iso</tt> doesn't work for you.
+<li><b><tt>cd52.iso</tt></b> представляет собой ISO9660 образ, который
+  может быть использован для создания загрузочного CD с помощью распространенного
+  программного обеспечения для записи CD-ROM большинства платформ.
+  Этот образ включает в себя широкий набор драйверов и обычно является 
+  рекомендуемым выбором, если ваша машина может загружаться с CDROM.
+ <li><b><tt>cdemu52.iso</tt></b> является ISO9660 образом, использующим 
+  загрузку "эмуляции дискеты" с образом дискеты 2,88М.
+  Остается надеяться, что немногие люди будут в нем нуждаться - большинство 
+  будет использовать <tt>cd52.iso</tt>. Используйте <tt>cdemu52.iso</tt>
+  только в том случае, если <tt>cd52.iso</tt> по каким-либо причинам у вам 
+  не работает.
 <li><b><tt>install52.iso</tt></b> is an ISO9660 image, containing
   all the standard install files.
   This file can be used to create a CD that can do a stand-alone
