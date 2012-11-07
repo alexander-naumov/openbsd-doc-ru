@@ -35,7 +35,7 @@
 <li><a href= "#Overview"    >4.1 - Обзор процесса установки OpenBSD</a>
 <li><a href= "#Checklist"   >4.2 - Предварительная подготовка</a>
 
-<li><a href="#MkInsMedia"   >4.3 - Создание загрузочного диска для 
+<li><a href="#MkInsMedia"   >4.3 - Создание загрузочного носителя для 
                                 установки OpenBSD</a>
     <ul>
     <li><a href="#MkCD-ROM" >4.3.1 - Создание загрузочного CD</a>
@@ -287,7 +287,7 @@ You will want to know the following items, at least:
 
 
 <a name="MkInsMedia"></a>
-<h2>4.3 - Создание загрузочного диска для 
+<h2>4.3 - Создание загрузочного носителя для 
           установки OpenBSD</h2>
 
 <p>
@@ -308,38 +308,38 @@ You will want to know the following items, at least:
   загрузку "эмуляции дискеты" с образом дискеты 2,88М.
   Остается надеяться, что немногие люди будут в нем нуждаться - большинство 
   будет использовать <tt>cd52.iso</tt>. Используйте <tt>cdemu52.iso</tt>
-  только в том случае, если <tt>cd52.iso</tt> по каким-либо причинам у вам 
+  только в том случае, если <tt>cd52.iso</tt> по каким-либо причинам у вас 
   не работает.
-<li><b><tt>install52.iso</tt></b> is an ISO9660 image, containing
-  all the standard install files.
-  This file can be used to create a CD that can do a stand-alone
-  OpenBSD install.
-<li><b><tt>floppy52.fs</tt></b> (Desktop PC) supports many
-  PCI and ISA NICs, IDE, SATA and simple SCSI adapters and some PCMCIA
-  support. Most users will use this image if booting from a
-  floppy.
-<li><b><tt>floppyB52.fs</tt></b> (Servers) supports many RAID controllers,
-  and some of the less common SCSI adapters.  However,
-  support for many standard SCSI adapters and many EISA and ISA
-  NICS has been removed.
-<li><b><tt>floppyC52.fs</tt></b> (Laptops) supports the CardBus and PCMCIA
-  devices found in many laptops.
+<li><b><tt>install52.iso</tt></b> представляет собой ISO9660 образ, содержащий
+  все стандартные установочные файлы.
+  Этот файл может быть использован для создания CD, обеспечивающего установку
+  OpenBSD в автономном режиме.  
+<li><b><tt>floppy52.fs</tt></b> (Настольные ПК) поддерживает множество
+  PCI и ISA сетевых карт (NIC), IDE, SATA и простые SCSI адаптеры, а также
+  некоторые PCMCIA. Большинство пользователей при загрузке с дискеты
+  будут использвать этот образ. 
+<li><b><tt>floppyB52.fs</tt></b> (Серверы) поддерживает многие RAID контроллеры,
+  некоторые из менее распространенных SCSI адаптеров.  Тем не менее, 
+  поддержка многих стандартных адаптеров SCSI и многих сетевых адаптеров (NIC) 
+  EISA и ISA была удалена.
+<li><b><tt>floppyC52.fs</tt></b> (Ноутбуки) поддерживает CardBus и PCMCIA
+  устройства, используемые во многих ноутбуках.
 </ul>
 
 <p>
-The <a href="../sparc.html">sparc</a> platform has four separate
-installation disk images to choose from:
+ Для платформы <a href="../sparc.html">sparc</a> предлагается четыре
+ различных образа установочного диска:
 
 <ul>
-<li><b><tt>floppy52.fs</tt></b> supports systems with a floppy disk.
-<li><b><tt>cd52.iso</tt></b> is an ISO image usable to make your own
-  CD for booting SPARC systems with a CD-ROM.
-<li><b><tt>miniroot52.fs</tt></b> can be written to a swap partition
-  and booted.
-<li><b><tt>install52.iso</tt></b> is an ISO9660 image, containing
-  all the standard install files.
-  This file can be used to create a CD that can do a stand-alone
-  OpenBSD install.
+<li><b><tt>floppy52.fs</tt></b> предназначен для систем, оборудованных
+  флоппи-дисководом.
+<li><b><tt>cd52.iso</tt></b> представляет собой образ ISO, предназначенный
+  для созддания CD для загрузки систем SPARC, оборудованных приводом CD-ROM.
+<li><b><tt>miniroot52.fs</tt></b> может быть записан в раздел swap и загружен.
+<li><b><tt>install52.iso</tt></b> является образом ISO9660 и содержит 
+  все стандартные установочные файлы.
+   Этот файл может быть использован для создания CD, обеспечивающем установку
+   OpenBSD в автономном режиме.  
 </ul>
 
 On modern platforms, you are best advised to use the CDROM
