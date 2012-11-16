@@ -42,8 +42,8 @@
     <li><a href="#UnixFlop" >4.3.2 - Создание дискет в Unix</a>
     <li><a href="#DosFlop"  >4.3.3 - Создание дискет в Windows</a>
     </ul>
-<li><a href="#Boot"         >4.4 - Загрузка установочного диска OpenBSD</a>
-<li><a href="#Install"      >4.5 - Выполнение простой установки</a>
+<li><a href="#Boot"         >4.4 - Загрузка c установочного носителя OpenBSD</a>
+<li><a href="#Install"      >4.5 - Простая установка</a>
   <ul>
   <li><a href="#InstStart"    >4.5.1 - Начало установки</a>
   <li><a href="#InstQuestions">4.5.2 - The Install Questions</a>
@@ -341,26 +341,24 @@ You will want to know the following items, at least:
    Этот файл может быть использован для создания CD, обеспечивающем установку
    OpenBSD в автономном режиме.  
 </ul>
-
-On modern platforms, you are best advised to use the CDROM
-boot images, as in some of the "bigger" platforms (such as amd64,
-sparc64), the floppy images have had to have a lot of drivers and
-utilities cut out, which can make installation much more difficult.
-Older platforms, such as i386 and sparc, are still quite installable
-from floppy.
+Для современных платформ лучше всего использовать загрузочный образ CDROM,
+в то время, как загрузочные образы дискет для некоторых "крупных" платформ
+не содержат многих драйверов и утилит, что может усложнить установку.
+На старые платформы, такие как i386 и sparc, по-прежнему можно успешно 
+установить операционную систему с дискеты. 
 
 <p>
 <a name="MkCD-ROM"></a>
-<h3>4.3.1 - Making a CD-ROM</h3>
+<h3>4.3.1 - Создание загрузочного CD</h3>
 
 <p>
-You can create a CD-ROM using the <tt>cd52.iso</tt> or
-<tt>install52.iso</tt> files.
-The exact details here are left to the reader to determine with
-the tools they have at their disposal.
+Для создания CD-ROM можно использовать файлы образов <tt>cd52.iso</tt> или
+<tt>install52.iso</tt>.
+Детали по созданию CD приводятся здесь, выбор же инструментов для этого,
+оставляем читателям.
 
 <p>
-In OpenBSD, you can create a CD from an ISO image using
+В OpenBSD можно создать CD из ISO образа с помощью
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cdio&amp;sektion=1">cdio(1)</a>:
 
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -368,28 +366,28 @@ In OpenBSD, you can create a CD from an ISO image using
 </pre></td></tr></table>
 
 <p>
-Most CD recorders sold for Windows and Macintosh systems come with
-software that can burn ISO images to blank media.
-If yours does not, there are various no-cost applications that can
-do this for you.
+К большинству пишущих приводов CD, продающихся для Windows и Macintosh систем,
+прилагается программное обеспечение для записи ISO образов на читый носитель.
+Если у вас нет этого, существуют различные бесплатные приложения, которые 
+можно использовать для записи.
 
 <p>
-Other Unix-like systems use applications such as
+Другие UNIX-подобные системы используют такие приложения, как:
 <a href="http://www.cdrkit.org/">cdrkit</a>.
 
 <p>
 <a name="MkFlop"></a>
 <a name="UnixFlop"></a>
-<h3>4.3.2 - Creating floppies on Unix</h3>
+<h3>4.3.2 - Создание дискет в UNIX</h3>
 
 <p>
-Precise details and device names may vary from Unix variant to Unix
-variant; use what is appropriate for your system.
+Конкретные детали и имена устройств могут отличаться в разных UNIX системах,
+используйте то, что подходит для вашей системы.  
 
 <p>
-To create a formatted floppy, use the
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fdformat&amp;sektion=1&amp;arch=i386">fdformat(1)</a>
-command to both format and check for bad sectors.
+Для форматирования дискеты и проверки плохих секторов можно воспользоваться
+коммандой
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fdformat&amp;sektion=1&amp;arch=i386">fdformat(1)</a>.
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -399,14 +397,15 @@ command to both format and check for bad sectors.
 </pre></td></tr></table>
 
 <p>
-If your output is like the above example, then the disk is OK.
-However, if you do not see ALL "V"'s then the disk is most
-likely bad, and you should try a new one.
+Если на экране вы увидите вывод комманды, похожий на приведенный выше, значит
+с дискетой все в порядке.
+Однако, если вы не увидите ВСЕ "V", значит дискета, скорее всего, повреждена и
+ее необходимо заменить.
 
 <p>
-To write the image file to the disk, use
+Для записи файла образа на диск, используйте 
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=0">dd(1)</a>.
-An example usage of <tt>dd(1)</tt> is below:
+Пример использования <tt>dd(1)</tt> приведен ниже:
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -414,11 +413,11 @@ An example usage of <tt>dd(1)</tt> is below:
 </pre></td></tr></table>
 
 <p>
-Once the image is written, check to make sure that the copied image is
-the same as the original with the
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cmp&amp;sektion=1">cmp(1)</a>
-command.
-If the diskette is identical to the image, you will just see another prompt.
+После того, как образ будет записан, проверьте идентичность записанного образа
+оригиналу с помощью команды
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cmp&amp;sektion=1">cmp(1)</a>.
+Если дискета идентична образу, в результате выполнения команды вы должны
+увидеть следующее:
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -427,22 +426,22 @@ If the diskette is identical to the image, you will just see another prompt.
 
 <p>
 <a name="DosFlop"></a>
-<h3>4.3.3 - Creating floppies on Windows</h3>
+<h3>4.3.3 - Создание дискет в Windows</h3>
 
 <p>
-To prepare a floppy in Windows, first use the native
-formatting tools to format the disk, verifying that the disk has
-no bad sectors.
+Чтобы подготовить дискету в Windows, сначала с помощью встроенных средств
+форматирования отформатируйте ее, убедившись, что диск не имеет
+плохих секторов.  
 
 <p>
-To write the installation image to the prepared floppy you can use
-<tt>ntrw.exe</tt>, which can be downloaded from the
+Для записи установочного образа на подготовленную дискету, в можете 
+использовать <tt>ntrw.exe</tt>, которую можно загрузить из каталога
 <a href="ftp://ftp.openbsd.org/pub/OpenBSD/5.2/tools/">tools</a>
-directory on any of the FTP mirrors.
+на любом из FTP зеркал.
 
 
 <p>
-Example usage of <i>ntrw</i>:
+Пример использования <i>ntrw</i>:
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -454,42 +453,43 @@ Example usage of <i>ntrw</i>:
 
 <p>
 <a name="Boot"></a>
-<h2>4.4 - Booting OpenBSD install media</h2>
+<h2>4.4 - Загрузка c установочного носителя OpenBSD</h2>
 
-<h3>Booting i386/amd64</h3>
+<h3>Загрузка i386/amd64</h3>
 
-Booting an install media on the i386 and amd64 PC platforms is nothing new
-to most people.
-Your system will have to be instructed to boot from whatever media you have
-chosen to use, usually through a BIOS setup option.
-If you want to boot from CD, your system BIOS must be able to and be set to
-boot from CD.
-Some older systems do not have this option, and you must use a floppy
-for booting your installation image.
-Don't worry though; even if you boot from floppy you can still install
-from the CD if it is supported by OpenBSD (i.e., almost all IDE drives).
+Загрузка с установочного носителя на платформах i386 и amd64 для большинства
+пользователей не содержит в себе ничего нового.
+Ваша система должна быть настроена на загрузку с нужного носителя, обычно
+это устанавливается в BIOS.
+Если вы хотите загрузиться с CD, ваш BIOS должен поддерживать и быть настроен
+на загрузку с CD.
+Некоторые устаревшие системы не имеют этой возможности и вам придется 
+использовать дискету для загрузки установочного образа.
+Не беспокойтесь по этому поводу, даже, если вам придется загружаться
+с дискеты, вы сможете продолжить установку с CD, если это поддерживается 
+OpenBSD (то есть, это практически все IDE диски).
 
 <p>
-You can also install by booting <a href="#bsd.rd">bsd.rd</a> from an
-existing OpenBSD partition, or over the network using the
-<a href="faq6.html#PXE">PXE boot process</a>.
+Так же, можно установить операционную систему, загрузив 
+<a href="#bsd.rd">bsd.rd</a> из существующего раздела OpenBSD, или по сети,
+используя <a href="faq6.html#PXE">процесс загрузки PXE</a>.
 
-<h3>Booting sparc/sparc64</h3>
+<h3>Загрузка sparc/sparc64</h3>
 
 <b>NOTE:</b>
-On the <a href="../sparc64.html">sparc64</a> platform, only the SBus
-machines (Ultra 1, Ultra 2) are bootable from floppy.
+Загрузиться с дискеты на платформе <a href="../sparc64.html">sparc64</a> 
+можно только на машинах SBus (Ultra 1, Ultra 2).
 
 <p>
-You will need the system to be at a monitor ROM prompt, which
-typically looks like "<tt>ok </tt>".
-If you are using a Sun keyboard, press and hold "STOP" while
-tapping "A".
-If using a serial console, a BREAK should return you to the
-monitor prompt.
+Необходимо, чтобы система на мониторе отобразила ROM строку, которая
+обычно выглядит, как "ok".
+Если вы используете клавиатуру Sun, нажмите и удерживайте "STOP", в то же
+время, нажав "А".
+При использовании последовательной консоли, нажатие BREAK вернет вас к
+командной строке.
 
 <p>
-Use the following command to boot from the floppy:
+Для загрузки с дискеты используйте следующую команду:
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -497,8 +497,8 @@ Use the following command to boot from the floppy:
 </pre></td></tr></table>
 
 <p>
-Usually, you can boot from the CDROM drive of a Sun system from
-the boot prompt by typing '<tt>boot cdrom</tt>':
+Обычно, на системе Sun  можно загрузиться с CDROM из командной строки, 
+если ввести '<tt>boot cdrom</tt>':
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -507,60 +507,61 @@ the boot prompt by typing '<tt>boot cdrom</tt>':
 
 <p>
 <a name="Install"></a>
-<h2>4.5 - Performing a simple install</h2>
-
-OpenBSD's new installer is designed to install and configure OpenBSD in
-a very usable default configuration with very little user intervention.
-In fact, you can often just hit <i>ENTER</i> a number of times to get a
-good OpenBSD install, moving your hands to the rest of the keyboard only
-to enter the root password.
-
-<p>
-The installer will create a partitioning plan based on the size of your
-hard disk.
-While this will NOT be a perfect layout for all people, it provides a
-good starting point and a good overall strategy for figuring out what
-you need.
+<h2>4.5 - Простая установка</h2>
+Новый инсталлятор OpenBSD предназначен для установки и настройки OpenBSD
+с очень полезной конфигурацией по умолчанию и с очень небольшим вмешательством
+пользователя.
+Действительно, часто можно просто несколько раз нажать <i>ENTER</i>, чтобы
+получить хорошо установленную OpenBSD, введя под конец пароль root.
 
 <p>
-We will start with a very simple install, with brief discussions of the
-options provided, and using the magic of hypertext links, allow you to
-read more on the topics that interest you and explore your options.
+Программа инсталляции создаст схему разбивки на разделы исходя из размера
+вашего жесткого диска.
+Хотя это не будет идеальным макетом для всех, она служит хорошей отправной
+точкой и хорошей общей стратегией для создания того, что вам нужно.
 
 <p>
-Installation notes for each platform are on the install CDs and FTP
-servers, in the file <tt>INSTALL.<i>&lt;plat&gt;</i></tt>, where
-<i>&lt;plat&gt;</i> is your <a href="../plat.html">platform</a>, for
-instance, <tt>i386</tt>.
+Мы начнем с очень простой установки кратко поясняя возможные варианты, 
+использование приводящихся в тексте гиперссылок, позволит вам получить
+дополнительную информацию по интересующим вас деталям.
+
+<p>
+Замечания по установке для каждой платформы находятся на установочных CD
+и FTP серверах в файле <tt>INSTALL.<i>&lt;плат&gt;</i></tt>, где
+<i>&lt;плат&gt;</i> это ваша <a href="../plat.html">платформа</a>,
+например, <tt>i386</tt>.
 
 <p>
 <a name="InstStart"></a>
-<h3>4.5.1 - Starting the install</h3>
-Whatever your means of booting is, it is now time to use it.  During
-the boot process, the kernel and all of the programs used to install
-OpenBSD are loaded into memory.
-Once the install kernel is booted, the boot media is no longer needed,
-everything runs from the RAM disk.
-You can actually remove the CD or floppy you booted from at this point,
-assuming you don't need the CD for installation files.
+<h3>4.5.1 - Начало установки</h3>
+Независимо от того, какое загрузочно устройство у вас установлено, настало
+время его использовать.
+Во время процесса загрузки, ядро и все программы, используемые для установки
+OpenBSD, загружается в память.
+После того, как установочное ядро будет загружено, загрузочный носитель
+больше не нужен все остальное запускается с RAM диска.
+Вы можете извлечь CD или дискету, с которой загрузились, если вам не нужен 
+этот CD для установки файлов.
 
 <p>
-At almost any point during the OpenBSD install process, you can
-terminate the current install attempt by hitting CTRL-C and can restart
-it without rebooting by running <tt>install</tt> at the shell prompt.
-You can also enter a "!" at most places in the installation to get to
-a shell prompt, then exit the shell to return to the installer.
+В любой момент процесса установки OpenBSD, вы можете завершить текущую 
+попытку установки, нажав CTRL-C, и может перезапустить установку без 
+перезагрузки, запустив <tt>install</tt> в командной строке оболочки.
+Вы также можете ввести "!" в большинстве мест в установке, чтобы получить
+доступ к командной строке, а затем выйти из оболочки и вернуться к 
+программе установки.
 
 <p>
-When your boot is successful, you will see a lot of text messages scroll by.
-This text, on many architectures in white on blue, is the
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8">dmesg</a>,
-the kernel telling you what devices have been found and how they are
-hooked to other devices.
-A copy of this text is saved as <tt>/var/run/dmesg.boot</tt>.
+При успешой загрузке вы увидите много выводимых на экран текстовых сообщений.
+На большинстве архитектур это текст белого цвета на синем фоне, представляющий
+собой
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8">dmesg</a>, 
+и содержащий сообщения ядра о найденых устройствах и как они были 
+подключены к другим устройствам.
+Копия этих текстовых сообщений сохраняется как <tt>/var/run/dmesg.boot</tt>.
 
 <p>
-Then, you will see the following:
+Далее вы увидите следующее:
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -573,37 +574,37 @@ Then, you will see the following:
 </pre></td></tr></table>
 
 <p>
-And with that, we reach our first question.  You have the three options
-shown:
+И вот, мы приходим к первому вопросу. Вы увидите три варианта для выбора: 
 
 <ul>
-<li><b>Install:</b> Load OpenBSD onto the system, overwriting whatever
-may have been there.  Note that it is possible to leave some partitions
-untouched in this process, such as a <tt>/home</tt>, but otherwise,
-assume everything else is overwritten.
-<li><b>Upgrade:</b> Install a new set of <a href="#FilesNeeded">install
-files</a> on this machine, but do not overwrite any configuration
-information, user data, or additional programs.  No disk formatting is
-done, nor are the <tt>/etc</tt> or <tt>/var</tt> directories overwritten.
-A few important notes:
+<li><b>Install:</b> Установка OpenBSD в вашу систему, которая перезапишет
+все, что там было.
+Обратите внимание, что при этом можно оставить некоторые разделы нетронутыми,
+такой как <tt>/home</tt>, но остальные будут перезаписаны.
+<li><b>Upgrade:</b> Установка нового набора 
+<a href="#FilesNeeded">инсталляционных файлов</a> без перезаписи какой-либо
+конфигурационной информации, пользовательсктх данных или установленных 
+приложений. Также, не будет произведено форматирование диска, равно как и 
+содержимое каталогов <tt>/etc</tt> или <tt>/var</tt> перезаписано не будет.
+Несколько важных замечаний:
 <ul>
-<li> You will not be given the option of installing the
-<tt>etc52.tgz</tt> file.
-After the install, you will have to
-<a href="upgrade52.html#etcUpdates">manually merge</a> the changes of
-<tt>etc52.tgz</tt> into your system before you can expect it to be
-fully functional.
-This is an important step which must be done, as otherwise certain key
-services (such as
+<li> У вас не будет возможности установить файл <tt>etc52.tgz</tt>.
+После установки нужно будет 
+<a href="upgrade52.html#etcUpdates">вручную объединить</a> изменения в
+<tt>etc52.tgz</tt> с вашей системой для приведения ее в полностью 
+работоспособное состояние.
+Это важный шаг, который должен быть сделан, иначе некоторые важные сервисы 
+(такие как
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4">pf(4)</a>)
-may not start.
+могут не запуститься.
 
-<li>The Upgrade process is not designed to skip releases!
-While this will often work, it is not supported.
-For OpenBSD 5.2, upgrading 5.1 to 5.2 is the only supported upgrade.
-If you have to upgrade from an older version, upgrade to intermediate
-versions first, or if the system is very out-of-date, consider a
-complete reinstall.
+<li>Процесс Обновления (Upgrade) не рассчитан на пропуск релизов!
+Хотя это часто работает, но не поддерживается.
+Для OpenBSD 5.2, обновление версии 5.1. до 5.2. - единственное поддерживаемое
+обновление.
+Если вы хотите обновиться с более старой версии, сначала обновитесь до
+промежуточных версий или, если ваша система очень устарела, рассмотрите
+полную переустановку.
 
 </ul>
 <!-- XXXversion -->
@@ -3260,3 +3261,4 @@ ok <b>reset</b>
 <small>$OpenBSD: faq4.html,v 1.321 2012/11/01 15:05:30 nick Exp $</small>
 </body>
 </html>
+	
