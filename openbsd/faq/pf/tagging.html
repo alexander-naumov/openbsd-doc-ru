@@ -32,8 +32,8 @@ PERFORMANCE OF THIS DOCUMENTATION
 <!-- Passes validator.w3.org, please keep it this way;
 please, use a max of 72 chars per line -->
 
-<a href="../../index.html">
-<img alt="[OpenBSD]" height=30 width=141 src="../../images/smalltitle.gif" border="0">
+<a href="../../../ru/index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../../../images/smalltitle.gif" border="0">
 </a>
 <p>
 [<a href="pools.html">Предыдущая: Пулы адресов и балансировка нагрузки</a>]
@@ -173,13 +173,11 @@ pass out on $ext_if ! tagged WIFI_NET
 
 <a name="policy"></a>
 <h2>Фильтрация на основе политик</h2>
-Фильтрация на основе политик применяет другой подход для описания набора
-фильтров.
+Фильтрация на основе политик применяет другой подход для описания набора фильтров.
 Политика определяет какие наборы правил для какого типа трафика разрешаются,
-а для какого типа блокируются.
-Пакеты же классифицируются политикой, основанной на обычных критериях: IP
-адрес/порт источника/приемника, протокол, и др.
-Например рассмотрим следующую политику файрвола:
+а для какого типа блокируются. Пакеты же классифицируются политикой,
+основанной на обычных критериях: IP адрес/порт источника/приемника,
+протокол, и др. Например рассмотрим следующую политику файрвола:
 <ul>
 <li>Разрешить трафик из внутренней сети в Интернет (LAN_INET) и подвергнуть
 трансляции (LAN_INET_NAT)
@@ -309,10 +307,16 @@ pass in on fxp0 tagged USER1
 
 <p>
 <hr>
-<a href="index.html"><img height="24" width="24" src="../../images/back.gif" border="0" alt="[back]"></a> 
+<a href="index.html"><img height="24" width="24" src="../../../images/back.gif" border="0" alt="[back]"></a> 
 <a href="mailto:www@openbsd.org">www@openbsd.org</a>
 <br>
-<small>$OpenBSD: tagging.html,v 1.21 2011/01/28 07:42:23 sthen Exp $</small>
+<small>
+<!--
+Originally [OpenBSD: tagging.html,v 1.21 ]<br>
+$Translation: tagging.html,v 1.7 2013/01/12 00:01:04 alex Exp $<br>
+-->
+$OpenBSD$
+</small>
 
 </body>
 </html> 
